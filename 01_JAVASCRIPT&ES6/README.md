@@ -2,9 +2,6 @@
 
 ## 서론
 
-
-[2016년 자바스크립트 학습에 대한 기사](https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f)
-
 진행되는 내용들의 이해 돕기 위해 알아두면 좋은 내용을 정리하였습니다.
 
 간단하게 쭉 읽고 넘어가시는 것을 추천드립니다.
