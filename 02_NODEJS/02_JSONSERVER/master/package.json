@@ -1,0 +1,19 @@
+{
+  "name": "master",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve:json": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "json-server": "^0.17.0",
+    "lowdb": "^1.0.0"
+  },
+  "dependencies": {
+    
+  }
+}
