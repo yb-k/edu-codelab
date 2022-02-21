@@ -13,7 +13,7 @@
 
 > LTS 란, Long Term Support로 안정적인 버전을 뜻합니다. 때문에 LTS 버전을 꼭 설치하시길 바랍니다.
 
-> 공식 도큐먼트에서 설치 방법을 가이드해드리고있습니다.
+> 위키사이트에서 설치 방법을 제공해드리고있습니다.
 
 > [설치가이드 확인하기](https://docs.morpheus.co.kr/client/spa/overview.html#id4)
 

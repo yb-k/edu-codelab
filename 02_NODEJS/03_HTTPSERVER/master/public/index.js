@@ -52,9 +52,10 @@
     getListBtn.addEventListener('click', function () {
       xhr({
         path: '/todos',
+        method: 'GET',
         succ: function (data) {
           listEl.innerHTML = '';
-          var bodyData = data.body || [];
+          var bodyData = data || [];
           for(var i = 0; i < bodyData.length; i += 1 ) {
             var liEl = document.createElement('li');
             var todo = bodyData[i]
