@@ -1,0 +1,17 @@
+{
+  "root": true,
+  "env": {
+    "browser": true
+  },
+  "extends": ["eslint:recommended", "airbnb-base"],
+  "plugins": [],
+  "globals": {
+    "Global": "writable",
+    "$":"readonly"
+  },
+  "rules": {
+      // "semi": ["error", "always"],
+      // "quotes": ["error", "double"]
+  },
+  "ignorePatterns": ["ignore/**"]
+}

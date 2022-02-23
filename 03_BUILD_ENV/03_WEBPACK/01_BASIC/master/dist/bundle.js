@@ -1,0 +1,2 @@
+(()=>{"use strict";window.onload=function(){!function(...o){console.log.apply(console,o)}("log"),function(...o){console.error.apply(console,o)}("error"),function(...o){console.info.apply(console,o)}("info"),function(...o){console.debug.apply(console,o)}("debug")}})();
+//# sourceMappingURL=bundle.js.map

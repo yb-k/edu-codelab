@@ -56,7 +56,7 @@ json-server --watch db.json --static ./public --port 3000
 6. `serve:custom`을 실행한 상태에서, Morpheus APP에서 `M.net.http.send`을 통해 호출해보기
 
 
-아래의 내용은 선택사항입니다.
+## 선택적 요구사항
 
 - 파일 업로드 기능 및 route 추가하기
 - `express project structure` 키워드를 검색 / 참고하여 프로젝트 구조를 개선
