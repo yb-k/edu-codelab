@@ -178,7 +178,7 @@ module.export = { // 내보내기
 }
 ```
 
-`브라우저`에서 사용하는 `ES6 import/export`
+`브라우저`에서 사용하는 `ES6`
 ```js
 import _ from 'lodash'; //가져오기
 
@@ -746,8 +746,6 @@ async function getData() {
 결과적으로 실패에 대한 처리를 위해 `try..catch` 구문를 통해 작성해야하는데,
 
 인터프리터에서 발생되는 런타임 오류 `error`와 인지하고 있는 실패에 대한 `reject`을 통한 처리를 구별할 수 없다.
-
-때문에 **개인적으로는** `async`,`await`의 사용을 비권장합니다.
 
 
 ***
