@@ -166,7 +166,7 @@ $('button.content-tab').eq(2).on('click', function () {
 #### 관심사 분리
 `HTML`, `CSS`, `JS`를 분리하는 것이 당연한 관심사의 분리라고 생각했다.
 
-project stucructer
+**Project Folder Stucructer**
 - html
   - intro.html
 - js
@@ -180,10 +180,12 @@ project stucructer
 
 <br>
 
-Vue SFC (Single File Component)
-- template (html)
-- script (js)
-- style (css)
+**Vue 파일 (Single File Component)**
+```vue
+<template/> <!-- HTML -->
+<script/> <!-- JS -->
+<style/> <!-- CSS -->
+```
 
 > 즉, `UI` 중 하나의 구성(모듈)이라는 관심사로 볼때는 `html`,`css`,`javascript`는 이 모듈의 구성원이다.
 
