@@ -144,7 +144,7 @@ $('button.content-tab').eq(2).on('click', function () {
   </div>
 </template>
 <script>
-  default export {
+  export default {
     data: function () {
       return {
         content : 'Vue'
