@@ -11,7 +11,7 @@
   - `아토믹 디자인 패턴(Atomic Design)`
 - `번들링(컴파일 또는 빌드)을 사용하는 프론트개발환경`
 
-
+---
 ### 웹 프론트 개발 트렌드
 
 > [2022 프론트엔드 동향](https://tsh.io/state-of-frontend/)
@@ -22,7 +22,7 @@
 
 실제 한국에서도 대기업에서는 표준 플랫폼으로 (`Vue` 또는 `React`)를 선택하여 개발하는 추세이다.
 
-
+---
 ### SPA (Single Page Application) with CSR (Client Side Rendering)
 
 #### SPA란
@@ -41,6 +41,8 @@
 - 단점
   - 초기 리소스 로딩이 오래 걸린다. (최적화를 위한 `code split` 과 `lazyload`로 해결됨)
   - 검색 엔진인, `SEO`에 취약하다 (SSG 프레임워크 등장)
+
+---
 
 #### 짚고 넘어가기
 
@@ -61,7 +63,10 @@
 
 - SSG 프레임워크(`Next.js` 또는 `Nuxt.js`)는 `SSG`와 `SSR` 두가지 방식을 같이 제공한다.
 
-> `Vue`와 같은 `SPA` 방식의 프레임워크들에서 단점을 보완하기 위해 여러 프레임워(`Nust.js`)들이 파생되었다.
+> `Vue`와 같은 `SPA` 방식의 프레임워크들에서 단점을 보완하기 위해 
+여러 프레임워(`Nust.js`)들이 파생되었다.
+
+--- 
 
 ### 선언형 프로그래밍 방식
 
@@ -121,12 +126,15 @@ $('button.content-tab').eq(2).on('click', function () {
 ```
 - `DOM`을 직접 핸들링하지 않는다.`상태`를 관리한다.
 
+---
 
 ### 컴포넌트(Component) 개발 방식
 
 `컴포넌트`란,  재사용이 가능한 독립된 모듈을 말한다.
 
 > `Vue`에서는 재사용 가능한 최소 단위로 표현한다.
+
+---
 
 #### 관심사 분리
 `HTML`, `CSS`, `JavaScript`를 분리하는 것이 당연한 관심사의 분리라고 생각했다.
@@ -150,13 +158,14 @@ Vue SFC (Single File Component)
 - script (js)
 - style (css)
 
+---
+
 #### 아토믹 디자인 패턴(Atomic Design)
  TODO
 
+---
 
 ### 번들링(컴파일 또는 빌드)을 사용하는 프론트개발환경
-
-
 
 
 ![webpack image](https://raw.githubusercontent.com/yb-k/edu-codelab/main/static/webpack-method.png)
