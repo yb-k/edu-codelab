@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+  const checked = (vm) => {
+    console.log(`데이터에 접근 할 수 ${vm.$data ? '있습니다.' : '없습니다.'}`);
+    console.log(`DOM 객체에 접근 할 수 ${vm.$el ? '있습니다.' : '없습니다.'}`);
+    console.log(`화면에서 ${vm._isMounted ? '존재합니다.' : '존재하지 않습니다.'}`)
+    console.log(`--------------------------------------------------------`)
+    console.log(`--------------------------------------------------------`)
+  }
+  Vue.component('child', {
+    props: ['message'],
+    template: '<h1>{{ message }}</h1>',
+    beforeCreate() {
+      console.log('자식 컴포넌트의 BeforeCreate 호출');
+      checked(this)
+    },
+    created() {
+      console.log('자식 컴포넌트의 created 호출');
+      checked(this)
+    },
+    beforeMount() {
+      console.log('자식 컴포넌트의 beforeMount 호출');
+      checked(this)
+    },
+    mounted() {
+      console.log('자식 컴포넌트의 mounted 호출');
+      checked(this)
+    },
+    beforeUpdate() {
+      console.log('자식 컴포넌트의 beforeUpdate 호출');
+      checked(this)
+    },
+    updated() {
+      console.log('자식 컴포넌트의 updated 호출');
+      checked(this)
+    },
+    beforeDestroy() {
+      console.log('자식 컴포넌트의 beforeDestroy 호출');
+      checked(this);
+    },
+    destroyed() {
+      console.log('자식 컴포넌트의 destroyed 호출');
+      checked(this)
+    }
+  })
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: '안녕하세요 Vue!',
+    show: true,
+  },
+  methods: {
+    onToggleChild() {
+      this.show=!this.show;
+    }
+  },
+  beforeCreate() {
+    console.log('부모 컴포넌트의 beforeCreate 호출');
+    checked(this)
+  },
+  created() {
+    console.log('부모 컴포넌트의 created 호출');
+    checked(this)
+  },
+  beforeMount() {
+    console.log('부모 컴포넌트의 beforeMount 호출');
+    checked(this)
+  },
+  mounted() {
+    console.log('부모 컴포넌트의 mounted 호출');
+    checked(this)
+  },
+  beforeUpdate() {
+    console.log('부모 컴포넌트의 beforeUpdate 호출');
+    checked(this)
+  },
+  updated() {
+    console.log('부모 컴포넌트의 updated 호출');
+    checked(this)
+  },
+  beforeDestroy() {
+    console.log('부모 컴포넌트의 beforeDestroy 호출');
+    checked(this)
+  },
+  destroyed() {
+    console.log('부모 컴포넌트의 destroyed 호출');
+    checked(this)
+  },
+  template: 
+  `<div>
+      <child v-if="show" v-bind:message="message"/>
+      <button v-on:click="onToggleChild">Toggle Child</button>
+    </div>`,
+  });
+  </script>
+</body>
+</html>
