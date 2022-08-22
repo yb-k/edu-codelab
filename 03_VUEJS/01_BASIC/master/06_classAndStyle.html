@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      .active {
+        background-color: red;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <h1>HTML 클래스 바인딩하기</h1>
+    <h3>객체 구문</h3>
+    <div id="vm1" height="500" width="500">
+      <div
+        v-bind:class="{ active: isActive, 'text-danger': hasError }"
+        width="300"
+        height="300"
+      >
+        객체 구문
+      </div>
+      <div v-bind:class="classObject">객체 바인딩</div>
+    </div>
+    <script>
+      let vm2 = new Vue({
+        el: "#vm1",
+        data() {
+          return {
+            isActive: true,
+            hasError: true,
+            classObject: {
+              active: true,
+              "text-danger": false,
+            },
+          };
+        },
+      });
+    </script>
+
+    <h3>computed object</h3>
+    <div id="computed">computed object</div>
+    <script>
+      let vm3 = new Vue({
+        el: "#computed",
+        data() {
+          return {
+            isActive: true,
+            error: null,
+          };
+        },
+        computed: {
+          classObject: function () {
+            return {
+              active: this.isActive && !this.error,
+              "text-danger": this.error && this.error.type === "fatal",
+            };
+          },
+        },
+      });
+    </script>
+
+    <h3>배열 구문</h3>
+    <div id="array">
+      <div v-bind:class="[activeClass, errorClass]"></div>
+    </div>
+    <script>
+      let vm4 = new Vue({
+        el: "#array",
+        data: {
+          activeClass: "active",
+          errorClass: "text-danger",
+        },
+      });
+    </script>
+
+    <h3>컴포넌트와 함께 사용하는 방법</h3>
+    <div id="withcomponent">
+      <my-component v-bind:class="{ active: isActive }"></my-component>
+    </div>
+    <script>
+      Vue.component("my-component", {
+        template: '<p class="foo bar">Hi</p>',
+      });
+      let vm5 = new Vue({
+        el: "#withcomponent",
+        data() {
+          return {
+            isActive: true,
+          };
+        },
+      });
+    </script>
+    <h2>인라인 스타일 바인딩</h2>
+    <h3>객체 구문</h3>
+    <div id="inline-object">
+      <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">
+        각각 바인딩
+      </div>
+      <div v-bind:style="styleObject">object를 통한 객체를 직접 바인딩</div>
+    </div>
+    <script>
+      let vm6 = new Vue({
+        el: "#inline-object",
+        data: {
+          activeColor: "red",
+          fontSize: 30,
+          styleObject: {
+            color: "red",
+            fontSize: "13px",
+          },
+        },
+      });
+    </script>
+
+    <h3>배열 구문</h3>
+    <div id="inlinearray">
+      <div v-bind:style="[baseStyles, overridingStyles]">
+        배열 구문을 통한 overridingStyles
+      </div>
+    </div>
+    <script>
+      let vm7 = new Vue({
+        el: "#inlinearray",
+        data() {
+          return {
+            baseStyles: {
+              color: "red",
+              fontSize: "13px",
+            },
+            overridingStyles: {
+              color: "blue",
+              fontSize: "30px",
+            },
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

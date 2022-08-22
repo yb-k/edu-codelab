@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <h3>보간법(Interpolation)</h3>
+    <div id="interpolation">
+      <span>메시지: {{ msg }}</span><br />
+      <span v-once>다시는 변경하지 않습니다: {{ msgOnce }}</span>
+    </div>
+    <script>
+      let vm1 = new Vue({
+        el: "#interpolation",
+        data() {
+          return {
+            msg: "message",
+            msgOnce: "this message can`t change",
+          };
+        },
+      });
+    </script>
+
+    <h3>원시 HTML</h3>
+    <div id="raw">
+      <p>Using mustaches: {{ rawHtml }}</p>
+      <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+    </div>
+    <script>
+      let vm2 = new Vue({
+        el: "#raw",
+        data() {
+          return {
+            rawHtml: `<span style="color:red"> This should be red</span>`,
+          };
+        },
+      });
+    </script>
+
+    <h3>속성</h3>
+    <div id="attribute">
+      <button v-bind:disabled="isButtonDisabled">Button</button>
+    </div>
+    <script>
+      let vm3 = new Vue({
+        el: "#attribute",
+        data() {
+          return {
+            isButtonDisabled: true,
+          };
+        },
+      });
+    </script>
+
+    <h3>javascript 표현식 사용</h3>
+    <div id="expression">
+      {{ number + 1 }} <br />
+      {{ ok ? 'YES' : 'NO' }} <br />
+      {{ message.split('').reverse().join('') }} <br />
+
+      <div v-bind:id="'list-' + id"></div>
+      <!-- 아래는 구문입니다, 표현식이 아닙니다. -->
+      <!-- {{ var a = 1 }} -->
+
+      <!-- 조건문은 작동하지 않습니다. 삼항 연산자를 사용해야 합니다. -->
+      <!-- {{ if (ok) { return message } }} -->
+    </div>
+    <script>
+      let vm4 = new Vue({
+        el: "#expression",
+        data() {
+          return {
+            number: 3,
+            ok: true,
+            message: "Hello World!",
+            id: 1,
+          };
+        },
+      });
+    </script>
+    <h3>디렉티브</h3>
+    <div id="directive">
+      <p v-if="seen">이제 나를 볼 수 있어요</p>
+    </div>
+    <script>
+      let vm5 = new Vue({
+        el: "#directive",
+        data() {
+          return {
+            seen: true,
+          };
+        },
+      });
+    </script>
+
+    <h3>전달인자</h3>
+    <div id="delivery">
+      <a v-bind:href="url"> 전달인자 링크 </a>
+    </div>
+    <script>
+      let vm6 = new Vue({
+        el: "#delivery",
+        data() {
+          return {
+            url: "http://www.naver.com",
+          };
+        },
+      });
+    </script>
+
+    <h3>동적 전달인자</h3>
+    <div id="dynamic-delivery">
+      <!--
+      동적 전달인자는 "동적 전달인자의 형식 제약"의 부분에서 후술되는바와 같이,
+      조금의 제약이 있는 점에 주의해주세요
+
+      **영문 공식 문서에 추가된 내용**
+      [attribute]의 이름을 지정할때, [attributeName] 과 같이 대문자 사용 불가능
+
+      When using in-DOM templates (i.e., templates written directly in an HTML file), 
+      you should also avoid naming keys with uppercase characters, as browsers will coerce attribute names into lowercase:
+      -->
+      <a v-bind:[attributename]="url"> 동적 전달인자 </a> <br />
+      <a v-on:[eventname]="doSomething"> doSomething Event </a>
+    </div>
+    <script>
+      let vm7 = new Vue({
+        el: "#dynamic-delivery",
+        data() {
+          return {
+            attributename: "href",
+            url: "http://www.naver.com",
+            eventname: "click",
+          };
+        },
+        methods: {
+          doSomething: function () {
+            console.log("do Something Event");
+          },
+        },
+      });
+    </script>
+
+    <h3>약어</h3>
+    <div id="abbreviation">
+      <!-- 전체 문법 -->
+      <a v-bind:href="url"> 전체 문법 </a> <br />
+
+      <!-- 약어 -->
+      <a :href="url"> 약어 </a><br />
+
+      <!-- shorthand with dynamic argument (2.6.0+) -->
+      <a :[key]="url"> 약어 + dynamic argument </a><br />
+      <h4>클릭 이벤트</h4>
+      <!-- 전체 문법 -->
+      <a v-on:click="doSomething"> 전체문법 </a><br />
+
+      <!-- 약어 -->
+      <a @click="doSomething"> 약어 </a><br />
+
+      <!-- shorthand with dynamic argument (2.6.0+) -->
+      <a @[event]="doSomething"> 약어 + dynamic argument </a><br />
+    </div>
+    <script>
+      let vm = new Vue({
+        el: "#abbreviation",
+        data() {
+          return {
+            key: "href",
+            url: "http://www.naver.com",
+            event: "click",
+          };
+        },
+        methods: {
+          doSomething: function () {
+            console.log("doSomething Event");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

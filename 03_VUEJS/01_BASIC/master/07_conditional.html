@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <h1>v-if 조건부 렌더링</h1>
+    <h3></h3>
+    <div id="ex1">
+      <h1 v-if="awesome">Vue is awesome!</h1>
+      <h1 v-else>Oh no 😢</h1>
+      <template v-if="ok">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+      </template>
+      <div v-if="Math.random() > 0.5">이제 나를 볼 수 있어요</div>
+      <div v-else>이제는 안보입니다</div>
+      <h3>v-else-if</h3>
+      <div v-if="type === 'A'">A</div>
+      <div v-else-if="type === 'B'">B</div>
+      <div v-else-if="type === 'C'">C</div>
+      <div v-else>Not A/B/C</div>
+    </div>
+    <script>
+      let vm1 = new Vue({
+        el: "#ex1",
+        data() {
+          return {
+            awesome: true,
+            ok: true,
+            type: "A",
+          };
+        },
+      });
+    </script>
+    <h3>key를 이용한 재사용 가능한 엘리먼트 제어</h3>
+    <div id="ex2">
+      <template v-if="loginType === 'username'">
+        <label>사용자 이름</label>
+        <input placeholder="사용자 이름을 입력하세요" />
+      </template>
+      <template v-else>
+        <label>이메일</label>
+        <input placeholder="이메일 주소를 입력하세요" />
+      </template>
+      <br />
+      <button @click="toggleLoginType">로그인 유형 변경</button>
+    </div>
+    <script>
+      let ex2 = new Vue({
+        el: "#ex2",
+        data() {
+          return {
+            loginType: "username",
+          };
+        },
+        methods: {
+          toggleLoginType: function () {
+            return (this.loginType =
+              this.loginType === "username" ? "email" : "username");
+          },
+        },
+      });
+    </script>
+
+    <h3>v-show</h3>
+    <div id="ex3">
+      <h1 v-show="ok">안녕하세요!</h1>
+      <button @click="toggleShow">보이기/안보이기</button>
+    </div>
+    <script>
+      let ex3 = new Vue({
+        el: "#ex3",
+        data() {
+          return {
+            ok: true,
+          };
+        },
+        methods: {
+          toggleShow: function () {
+            this.ok = this.ok === true ? false : true;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
