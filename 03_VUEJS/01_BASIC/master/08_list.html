@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <h2>v-for 로 엘리먼트에 배열 매핑하기</h2>
+    <div id="ex1">
+      <ul id="example-1">
+        <li v-for="item in items">{{ item.message }}</li>
+      </ul>
+    </div>
+    <script>
+      let ex1 = new Vue({
+        el: "#ex1",
+        data() {
+          return {
+            items: [{ message: "Foo" }, { message: "Bar" }],
+          };
+        },
+      });
+    </script>
+    <div id="ex1-2">
+      <li v-for="(item, index) in items">
+        {{ parentMessage }} - {{ index }} - {{ item.message }}
+      </li>
+    </div>
+    <script>
+      let ex1_2 = new Vue({
+        el: "#ex1-2",
+        data() {
+          return {
+            parentMessage: "Parent",
+            items: [{ message: "Foo" }, { message: "Bar" }],
+          };
+        },
+      });
+    </script>
+
+    <h3>v-for와 객체</h3>
+    <div id="ex2">
+      <ul id="v-for-object" class="demo">
+        <li v-for="value in object">{{ value }}</li>
+      </ul>
+      <div v-for="(value, name) in object">{{ name }}: {{ value }}</div>
+      <div v-for="(value, name, index) in object">
+        {{ index }}. {{ name }}: {{ value }}
+      </div>
+    </div>
+    <script>
+      let ex2 = new Vue({
+        el: "#ex2",
+        data() {
+          return {
+            object: {
+              title: "How to do lists in Vue",
+              author: "Jane Doe",
+              publishedAt: "2016-04-10",
+            },
+          };
+        },
+      });
+    </script>
+
+    <h3>Maintaining State</h3>
+    <div id="ex3">
+      <div v-for="(item, index) in items" v-bind:key="item.index">
+        {{item.id}}
+      </div>
+    </div>
+    <script>
+      let ex3 = new Vue({
+        el: "#ex3",
+        data() {
+          return {
+            items: [{ id: "first message" }, { id: "second message" }],
+          };
+        },
+      });
+    </script>
+    <h3>배열 변경 감지</h3>
+    <div>콘솔을 열고 다음의 예제를 입력해보세요.</div>
+    <div>ex3.items.push({id : "third message"});</div>
+    <div>ex3.items.length=1;</div>
+
+    <h3>객체 변경 감지에 관한 주의사항</h3>
+    <div id="ex4">
+      <div>{{a}}</div>
+    </div>
+    <script>
+      Vue.component("item", {
+        props: ["b"],
+        template: `<div>{{b}}</div>`,
+      });
+      let ex4 = new Vue({
+        el: "#ex4",
+        data() {
+          return {
+            a: 1, // 반응형
+          };
+        },
+      });
+    </script>
+    <div>
+      다음과 같이 변수를 추가해도 변경이 감지 되지 않음. 또한, 루트 레벨의
+      반응형 속성은 추가할 수 없음.
+    </div>
+    <div>ex4.b = 2;</div>
+    <div>변경이 감지되게 데이터를 넣으려면 다음과 같이 해야함.</div>
+    <div>Vue.set(object, propertyName, value)</div>
+
+    <h3>필터링/ 정렬 된 결과 표시하기</h3>
+    <div id="ex5">
+      <div>computed 속성을 이용해서 표현</div>
+      <li v-for="n in evenNumbers">{{ n }}</li>
+      <div>method를 이용한 표현</div>
+      <li v-for="n in even(numbers)">{{ n }}</li>
+    </div>
+    <script>
+      let ex5 = new Vue({
+        el: "#ex5",
+        data: {
+          numbers: [1, 2, 3, 4, 5],
+        },
+        computed: {
+          evenNumbers: function () {
+            return this.numbers.filter(function (number) {
+              return number % 2 === 0;
+            });
+          },
+        },
+        methods: {
+          even: function (numbers) {
+            return numbers.filter(function (number) {
+              return number % 2 === 0;
+            });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
