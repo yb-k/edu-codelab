@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <h1>이벤트 핸들링</h1>
+    <h3>Evnet Listener</h3>
+    <div id="ex1">
+      <button v-on:click="counter += 1">Add 1</button>
+      <p>위 버튼을 클릭한 횟수는 {{ counter }} 번 입니다.</p>
+    </div>
+    <script>
+      let ex1 = new Vue({
+        el: "#ex1",
+        data() {
+          return {
+            counter: 0,
+          };
+        },
+      });
+    </script>
+
+    <h3>메소드 이벤트 핸들러</h3>
+    <div id="ex2">
+      <!-- `greet`는 메소드 이름으로 아래에 정의되어 있습니다 -->
+      <button v-on:click="greet">Greet</button>
+    </div>
+    <script>
+      let ex2 = new Vue({
+        el: "#ex2",
+        data() {
+          return {
+            name: "vue.js",
+          };
+        },
+        // 메소드는 `methods` 객체 안에 정의합니다
+        methods: {
+          greet: function (event) {
+            // 메소드 안에서 사용하는 `this` 는 Vue 인스턴스를 가리킵니다
+            alert("Hello " + this.name + "!");
+            // `event` 는 네이티브 DOM 이벤트입니다
+            if (event) {
+              alert(event.target.tagName);
+            }
+          },
+        },
+      });
+    </script>
+    <div>
+      JavaScript를 이용해서 메소드를 호출할 수 있습니다. cosonsole 창에
+      입력해보세요
+    </div>
+    <div>ex2.greet();</div>
+
+    <h3>인라인 메소드 핸들러</h3>
+    <div id="ex3">
+      <button v-on:click="say('hi')">Say hi</button>
+      <button v-on:click="say('what')">Say what</button>
+    </div>
+    <script>
+      let ex3 = new Vue({
+        el: "#ex3",
+        methods: {
+          say: function (message) {
+            alert(message);
+          },
+        },
+      });
+    </script>
+
+    <h3>인라인 명령문에 $event 변수를 사용해 native event 에 접근 가능.</h3>
+    <div id="ex4">
+      <button v-on:click="warn('Form cannot be submitted yet.', $event)">
+        Submit
+      </button>
+    </div>
+    <script>
+      let ex4 = new Vue({
+        el: "#ex4",
+        data() {
+          return {};
+        },
+        methods: {
+          warn: function (message, event) {
+            // 이제 네이티브 이벤트에 액세스 할 수 있습니다
+            if (event) event.preventDefault();
+            alert(message);
+          },
+        },
+      });
+    </script>
+
+    <h3>키 수식어</h3>
+    <div id="ex">
+      <input v-on:keyup.enter="submit" placeholder="enter 입력시 alert" /><br />
+      <input
+        v-model="alt"
+        @keyup.alt.67="clear"
+        placeholder="Alt + c > clear"
+      /><br />
+      <div>meta(command) 과 눌렀을때만 이벤트 동작</div>
+      <button @click.meta.exact="onCtrlClick">onCtrlClick</button>
+    </div>
+    <script>
+      let ex = new Vue({
+        el: "#ex",
+        data() {
+          return {
+            alt: "a",
+          };
+        },
+        methods: {
+          submit: function () {
+            alert("enter 이벤트 trigger");
+          },
+          clear: function () {
+            this.alt = "";
+          },
+          onCtrlClick: function () {
+            alert("ctrl 과 눌렀을 때만 alert");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
