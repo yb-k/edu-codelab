@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>폼 입력 바인딩</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <h1>폼 입력 바인딩</h1>
+
+    <div id="ex">
+      <h3>문자열</h3>
+      <input v-model="message" placeholder="여기를 수정해보세요" />
+      <p>메시지: {{ message }}</p>
+      <h3>체크 박스</h3>
+      <input type="checkbox" id="checkbox" v-model="checked" />
+      <label for="checkbox">{{ checked }}</label>
+      <h3>배열을 활용한 체크 박스</h3>
+      <input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
+      <label for="jack">Jack</label>
+      <input type="checkbox" id="john" value="John" v-model="checkedNames" />
+      <label for="john">John</label>
+      <input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
+      <label for="mike">Mike</label>
+      <br />
+      <span>체크한 이름: {{ checkedNames }}</span>
+      <h3>radio botton</h3>
+      <input type="radio" id="one" value="One" v-model="picked" />
+      <label for="one">One</label>
+      <br />
+      <input type="radio" id="two" value="Two" v-model="picked" />
+      <label for="two">Two</label>
+      <br />
+      <span>선택: {{ picked }}</span>
+      <h3>select</h3>
+      <select v-model="selected">
+        <option disabled value="">Please select one</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <span>선택함: {{ selected }}</span>
+
+      <h3>multiple select</h3>
+      <select v-model="selectedMultiple" multiple>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <br />
+      <span>Selected: {{ selectedMultiple }}</span>
+    </div>
+    <script>
+      let ex = new Vue({
+        el: "#ex",
+        data() {
+          return {
+            message: "",
+            checked: false,
+            checkedNames: [],
+            picked: "",
+            selected: "",
+            selectedMultiple: ["A", "B", "C"],
+          };
+        },
+      });
+    </script>
+  </body>
+</html>
