@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>component</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <h1>컴포넌트</h1>
+    <h3>전역 등록</h3>
+    <div id="ex1">
+      <my-component></my-component>
+    </div>
+    <script>
+      // 등록
+      Vue.component("my-component", {
+        template: "<div>사용자 정의 전역 컴포넌트 입니다!</div>",
+      });
+      let ex1 = new Vue({
+        el: "#ex1",
+        data() {
+          return {};
+        },
+      });
+    </script>
+    <h3>지역 등록</h3>
+    <div id="ex2">
+      <my-component></my-component>
+    </div>
+    <script>
+      var Child = {
+        template: "<div>사용자 정의 지역 컴포넌트 입니다!</div>",
+      };
+
+      let ex2 = new Vue({
+        el: "#ex2",
+        data() {
+          return {};
+        },
+        components: {
+          // <my-component> 는 상위 템플릿에서만 사용할 수 있습니다.
+          "my-component": Child,
+        },
+      });
+    </script>
+    <h3>구문 경고</h3>
+    <div id="ex3">
+      <table>
+        <tr is="my-row"></tr>
+        <tr is="my-row"></tr>
+      </table>
+    </div>
+    <script>
+      var myRow = {
+        template: `<tr>aa</tr>`,
+      };
+      let ex3 = new Vue({
+        el: "#ex3",
+        data() {
+          return {};
+        },
+        components: {
+          "my-row": myRow,
+        },
+      });
+    </script>
+    <h3>data 는 함수형으로 작성</h3>
+    <div id="ex4">
+      <h3>data 를 함수형으로 작성하지 않았을때</h3>
+      <simple-counter></simple-counter>
+      <simple-counter></simple-counter>
+      <simple-counter></simple-counter>
+      <h3>data 를 함수형으로 작성했을 했을 경우</h3>
+      <simple-counter2></simple-counter2>
+      <simple-counter2></simple-counter2>
+      <simple-counter2></simple-counter2>
+    </div>
+    <script>
+      var data = { counter: 0 };
+      var data2 = function () {
+        return { counter: 0 };
+      };
+      Vue.component("simple-counter", {
+        template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+        // 데이터는 기술적으로 함수이므로 Vue는 따지지 않지만
+        // 각 컴포넌트 인스턴스에 대해 같은 객체 참조를 반환합니다.
+        data: function () {
+          return data;
+        },
+      });
+      Vue.component("simple-counter2", {
+        template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+        data: function () {
+          return { counter: 0 };
+        },
+      });
+      let ex4 = new Vue({
+        el: "#ex4",
+        data() {
+          return {};
+        },
+      });
+    </script>
+    <h3>Props</h3>
+    <div id="ex5">
+      <child message="안녕하세요!"></child>
+      <h3>동적 prop</h3>
+      <input v-model="parentMsg" />
+      <br />
+      <child2 v-bind:my-message="parentMsg"></child2>
+    </div>
+    <script>
+      Vue.component("child", {
+        // props 정의
+        props: ["message"],
+        // 데이터와 마찬가지로 prop은 템플릿 내부에서 사용할 수 있으며
+        // vm의 this.message로 사용할 수 있습니다.
+        template: "<span>{{ message }}</span>",
+      });
+      Vue.component("child2", {
+        props: ["myMessage"],
+        template: "<span>{{ myMessage }}</span>",
+      });
+      let ex5 = new Vue({
+        el: "#ex5",
+        data() {
+          return { parentMsg: "부모로 부터 받은 메시지" };
+        },
+      });
+    </script>
+    <div id="ex6">
+      <h3>단방향 데이터 흐름</h3>
+      <h6>부모에서 입력한 데이터는 자식에게 영향을 줍니다.</h6>
+      <input v-model="parent" />
+      <h6>자식에서 입력한 데이터는 부모에게 영형을 주지 않습니다.</h6>
+      <child v-bind:received-message="parent"></child>
+    </div>
+
+    <script>
+      Vue.component("child", {
+        props: ["receivedMessage"],
+        template: `<input v-model="receivedMessage"/>`,
+      });
+      let ex6 = new Vue({
+        el: "#ex6",
+        data() {
+          return { parent: "부모로 부터 받은 메시지" };
+        },
+      });
+    </script>
+    <h3>porp 값 검증</h3>
+    <div id="ex7">
+      <!-- <input type="number" v-model="props.propA" placeholder="숫자만 " />
+      <select multibles v-model="props.propB" placeholder=" 여러개 가능">
+        <option>A</option>
+        <option>B</option>
+      </select> -->
+      <h5>숫자 입력시 child component 생성</h5>
+      <input type="text" v-model="props.propC" placeholder="필수 값" />
+      <!-- <input type="text" v-model="props.propD" placeholder="" />
+      <input type="text" v-model="props.propF" placeholder="" /> -->
+      <example v-bind="props"></example>
+    </div>
+    <script>
+      Vue.component("example", {
+        props: {
+          // 기본 타입 확인 (`null` 은 어떤 타입이든 가능하다는 뜻입니다)
+          propA: Number,
+          // 여러개의 가능한 타입
+          propB: [String, Number],
+          // 문자열이며 꼭 필요합니다
+          propC: {
+            type: Number,
+            required: true,
+          },
+          // 숫자이며 기본 값을 가집니다
+          propD: {
+            type: Number,
+            default: 100,
+          },
+          // 객체/배열의 기본값은 팩토리 함수에서 반환 되어야 합니다.
+          propE: {
+            type: Object,
+            default: function () {
+              return { message: "hello" };
+            },
+          },
+          // 사용자 정의 유효성 검사 가능
+          propF: {
+            validator: function (value) {
+              return value > 10;
+            },
+          },
+        },
+        template: "<div>{{propC}}</div>",
+      });
+      let ex7 = new Vue({
+        el: "#ex7",
+        data() {
+          return {
+            myName: "",
+            props: {
+              propA: 1,
+              propB: "A",
+              propC: 3,
+              propD: 4,
+              propE: { message: "message" },
+              propF: 11,
+            },
+          };
+        },
+      });
+    </script>
+    <h3>v-on을 이용한 사용자 지정 이벤트</h3>
+    <div id="ex8">
+      <p>{{ total }}</p>
+      <button-counter v-on:increment="incrementTotal"></button-counter>
+      <button-counter v-on:increment="incrementTotal"></button-counter>
+    </div>
+    <script>
+      Vue.component("button-counter", {
+        template:
+          '<button v-on:click="incrementCounter">{{ counter }}</button>',
+        data: function () {
+          return {
+            counter: 0,
+          };
+        },
+        methods: {
+          incrementCounter: function () {
+            this.counter += 1;
+            this.$emit("increment");
+          },
+        },
+      });
+
+      let ex8 = new Vue({
+        el: "#ex8",
+        data() {
+          return {
+            total: 0,
+          };
+        },
+        methods: {
+          incrementTotal: function () {
+            this.total += 1;
+          },
+        },
+      });
+    </script>
+    <h3>비 부모 자식간 통신</h3>
+    <div id="demo">
+      <component1></component1>
+      <component2></component2>
+    </div>
+  </body>
+  <script>
+    // 비어있는 Vue 인스턴스를 중앙 이벤트 버스로 사용
+    var bus = new Vue();
+    var component1 = {
+      template: `<div><input type="text" v-model="name" @input="busEvent()" /></div>`,
+      data() {
+        return {
+          name: "Hello World!",
+        };
+      },
+      methods: {
+        busEvent() {
+          bus.$emit("changeMessage", this.name);
+        },
+      },
+    };
+    var component2 = {
+      template: `<div>{{name}}</div>`,
+      data() {
+        return {
+          name: "defult Value",
+        };
+      },
+      methods: {
+        changeName: function (name) {
+          this.name = name;
+        },
+      },
+      created() {
+        bus.$on("changeMessage", (message) => {
+          console.log(this.name);
+          this.changeName(message);
+        });
+      },
+    };
+
+    var vm = new Vue({
+      el: "#demo",
+      components: {
+        component1: component1,
+        component2: component2,
+      },
+    });
+  </script>
+  
+  </body>
+</html>
