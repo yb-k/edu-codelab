@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="demo" class="container">
+      <div>
+        <h1>나는 부모 컴포넌트의 제목입니다</h1>
+        <h2>부모 컴포넌트에서 슬롯을 통해 콘텐츠를 넣어줍니다.</h2>
+        <my-component>자식의 슬롯 내부에 들어갑니다 ~</my-component>
+      </div>
+      <div>
+        <h1>나는 부모 컴포넌트의 제목입니다</h1>
+        <h2>부모 컴포넌트에서 슬롯에 아무 콘텐츠도 넣어주지 않습니다.</h2>
+        <my-component></my-component>
+      </div>
+    </div>
+  </body>
+  <script>
+    Vue.component("myComponent", {
+      template:
+        "<div>\
+      <h2>나는 자식 컴포넌트의 제목입니다</h2>\
+      <slot>\
+        부모에서 콘텐츠를 넣어주지 않았을때 기본값으로 보여집니다.\
+      </slot>\
+    </div>",
+    });
+    Vue.component("slotExample", {
+      template:
+        '<div class="container">\
+      <header>\
+        <h1>여기에 페이지 제목이 위치합니다</h1>\
+      </header>\
+      <main>\
+        <p>메인 컨텐츠의 단락입니다.</p>\
+        <p>하나 더 있습니다.</p>\
+      </main>\
+      <footer>\
+        <p>여기에 연락처 정보입니다.</p>\
+      </footer>\
+    </div>',
+    });
+    var vm = new Vue({
+      el: "#demo",
+      data: {
+        message: "Hello World!",
+      },
+    });
+  </script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>compnents-edge-case</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <h3>루트 데이터에 접근하기</h3>
+    <div id="ex">
+      <child v-bind:parentMessage="message"></child>
+    </div>
+    <script>
+      Vue.component("child", {
+        template: `<div>{{parentMessage}}</div>`,
+        computed: {
+          parentMessage: function () {
+            return this.$root.message;
+          },
+        },
+      });
+      let ex = new Vue({
+        el: "#ex",
+        data() {
+          return {
+            message: "this is root data",
+          };
+        },
+      });
+    </script>
+    <h3>자식 컴포넌트의 인스턴스 및 요소에 접근하기</h3>
+    <div id="ex1">
+      <base-input ref="usernameInput"></base-input>
+    </div>
+    <script>
+      Vue.component("base-input", {
+        template: `<input ref="input">`,
+      });
+      let ex1 = new Vue({
+        el: "#ex1",
+        data() {
+          return {};
+        },
+        methods: {
+          // Used to focus the input from the parent
+          focus: function () {
+            this.$refs.input.focus();
+
+            // 자식요소의 인풋이 포커스 되었을때 >> 자식요소 접근.
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
