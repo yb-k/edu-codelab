@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <h1>사용자 지정 디렉티브</h1>
+    <h3>디렉티브 등록</h3>
+    <h5>
+      화면이 로딩되었을 때 인풋에 focus 를 주는 사용자 디렉티브를 등록하고
+      사용한 모습.
+    </h5>
+    <div id="ex1">
+      <input v-focus />
+    </div>
+    <script>
+      // 전역 사용자 정의 디렉티브 v-focus 등록
+      Vue.directive("focus", {
+        // 바인딩 된 엘리먼트가 DOM에 삽입되었을 때...
+        inserted: function (el) {
+          // 엘리먼트에 포커스를 줍니다
+          el.focus();
+        },
+      });
+      // 컴포넌트에 등록시 다음과 같이 합니다.
+      //       directives: {
+      //   focus: {
+      //     // 디렉티브 정의
+      //     inserted: function (el) {
+      //       el.focus()
+      //     }
+      //   }
+      // }
+      let ex1 = new Vue({
+        el: "#ex1",
+        data() {
+          return {};
+        },
+      });
+    </script>
+    <h3>훅 함수</h3>
+    <div id="ex2">
+      <div id="hook-arguments-example" v-demo:foo.a.b="message"></div>
+    </div>
+    <script>
+      Vue.directive("demo", {
+        bind: function (el, binding, vnode) {
+          var s = JSON.stringify;
+          el.innerHTML =
+            "name: " +
+            s(binding.name) +
+            "<br>" +
+            "value: " +
+            s(binding.value) +
+            "<br>" +
+            "expression: " +
+            s(binding.expression) +
+            "<br>" +
+            "argument: " +
+            s(binding.arg) +
+            "<br>" +
+            "modifiers: " +
+            s(binding.modifiers) +
+            "<br>" +
+            "vnode keys: " +
+            Object.keys(vnode).join(", ");
+        },
+      });
+      let ex2 = new Vue({
+        el: "#ex2",
+        data() {
+          return { message: "hello!" };
+        },
+      });
+    </script>
+    <h3>다이나믹 디렉티브</h3>
+    <div id="ex3">
+      <h3>Scroll down inside this section ↓</h3>
+      <p v-pin:[direction]="200">
+        I am pinned onto the page at 200px to the left.
+      </p>
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </div>
+    <script>
+      Vue.directive("pin", {
+        bind: function (el, binding, vnode) {
+          el.style.position = "fixed";
+          var s = binding.arg == "left" ? "left" : "top";
+          el.style[s] = binding.value + "px";
+        },
+      });
+
+      let ex3 = new Vue({
+        el: "#ex3",
+        data() {
+          return {
+            direction: "left",
+          };
+        },
+      });
+    </script>
+    <h3>객체 리터럴</h3>
+    <div id="ex">
+      <div v-demo="{ color: 'white', text: 'hello!' }">로그를 확인하세요!</div>
+    </div>
+    <script>
+      Vue.directive("demo", function (el, binding) {
+        console.log(binding.value.color); // => "white"
+        console.log(binding.value.text); // => "hello!"
+      });
+      let ex = new Vue({
+        el: "#ex",
+        data() {
+          return {};
+        },
+      });
+    </script>
+  </body>
+</html>
