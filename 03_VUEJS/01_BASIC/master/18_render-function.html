@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rendering function & JSX</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <h1>render function</h1>
+    <h3>기본</h3>
+    <div id="ex1">
+      <anchored-heading :level="1">Hello world!</anchored-heading>
+      <anchored-heading :level="2">Hello world!</anchored-heading>
+      <anchored-heading :level="3">Hello world!</anchored-heading>
+    </div>
+    <script>
+      Vue.component("anchored-heading", {
+        render: function (createElement) {
+          return createElement(
+            "h" + this.level, // 태그 이름
+            this.$slots.default // 자식의 배열
+          );
+        },
+        props: {
+          level: {
+            type: Number,
+            required: true,
+          },
+        },
+      });
+      let ex1 = new Vue({
+        el: "#ex1",
+        data() {
+          return {};
+        },
+      });
+    </script>
+
+    <h3>전체 예제</h3>
+    <div id="ex2">
+      <anchored-heading :level="1">Hello World!</anchored-heading>
+      <anchored-heading :level="2">Hello JavaScript</anchored-heading>
+    </div>
+    <script>
+      var getChildrenTextContent = function (children) {
+        return children
+          .map(function (node) {
+            return node.children
+              ? getChildrenTextContent(node.children)
+              : node.text;
+          })
+          .join("");
+      };
+
+      Vue.component("anchored-heading", {
+        render: function (createElement) {
+          // kebabCase id를 만듭니다.
+          var headingId = getChildrenTextContent(this.$slots.default)
+            .toLowerCase()
+            .replace(/\W+/g, "-")
+            .replace(/(^-|-$)/g, "");
+
+          return createElement("h" + this.level, [
+            createElement(
+              "a",
+              {
+                attrs: {
+                  name: headingId,
+                  href: "#" + headingId,
+                },
+              },
+              this.$slots.default
+            ),
+          ]);
+        },
+        props: {
+          level: {
+            type: Number,
+            required: true,
+          },
+        },
+      });
+      let ex2 = new Vue({
+        el: "#ex2",
+        data() {
+          return {};
+        },
+      });
+    </script>
+    <h2>템플릿 기능을 일반 JavaScript로 변경하기</h2>
+    <h3>전체 예제</h3>
+    <div id="ex3">
+      <anchored-heading :items="items" :level="1"
+        >Hello World!</anchored-heading
+      >
+    </div>
+    <script>
+      Vue.component("anchored-heading", {
+        render: function (createElement) {
+          if (this.items.length) {
+            return createElement(
+              "ul",
+              this.items.map(function (item) {
+                return createElement("li", item.name);
+              })
+            );
+          } else {
+            return createElement("p", "No items found.");
+          }
+        },
+        props: {
+          items: Array,
+          level: {
+            type: Number,
+            required: true,
+          },
+        },
+      });
+      let ex3 = new Vue({
+        el: "#ex3",
+        data() {
+          return {
+            items: [{ name: "foo" }, { name: "bar" }, { name: "qqq" }],
+          };
+        },
+        computed: {},
+      });
+    </script>
+    <h2>템플릿 기능을 일반 JavaScript로 변경하기</h2>
+    <h3>v-if 와 v-for</h3>
+    <div id="ex4">
+      <ul v-if="items.length">
+        <li v-for="item in items">{{ item.name }}</li>
+      </ul>
+      <p v-else>No items found.</p>
+      <h4>render 함수를 활용하기</h4>
+      <ex4 :items="items"></ex4>
+    </div>
+    <script>
+      Vue.component("ex4", {
+        props: {
+          items: Array,
+        },
+        render: function (createElement) {
+          console.log(this.items);
+          if (this.items.length) {
+            return createElement(
+              "ul",
+              this.items.map(function (item) {
+                return createElement("li", item.name);
+              })
+            );
+          } else {
+            return createElement("p", "No items found.");
+          }
+        },
+      });
+      let ex4 = new Vue({
+        el: "#ex4",
+        data() {
+          return {
+            items: [{ name: "foo" }, { name: "bar" }, { name: "qqq" }],
+          };
+        },
+      });
+    </script>
+    <h3>slot</h3>
+    <div id="ex5">
+      <ex5>slot default</ex5>
+    </div>
+    <script>
+      Vue.component("ex5", {
+        props: {},
+        render: function (createElement) {
+          // `<div><slot></slot></div>`
+          return createElement("div", this.$slots.default);
+        },
+      });
+      let ex5 = new Vue({
+        el: "#ex5",
+        data() {
+          return {};
+        },
+      });
+    </script>
+  </body>
+</html>

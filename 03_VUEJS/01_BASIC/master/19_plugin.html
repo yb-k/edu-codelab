@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <h3></h3>
+    <div id="ex"></div>
+    <script>
+      MyPlugin.install = function (Vue, options) {
+        // 1. 전역 메소드 또는 속성 추가
+        Vue.myGlobalMethod = function () {
+          // 필요한 로직 ...
+        };
+
+        // 2. 전역 에셋 추가
+        Vue.directive("my-directive", {
+          bind(el, binding, vnode, oldVnode) {
+            // 필요한 로직 ...
+          },
+        });
+
+        // 3. 컴포넌트 옵션 주입
+        Vue.mixin({
+          created: function () {
+            // 필요한 로직 ...
+          },
+        });
+
+        // 4. 인스턴스 메소드 추가
+        Vue.prototype.$myMethod = function (methodOptions) {
+          // 필요한 로직 ...
+        };
+      };
+      Vue.use(MyPlugin);
+      let ex = new Vue({
+        el: "#ex",
+        data() {
+          return {};
+        },
+      });
+    </script>
+  </body>
+</html>
