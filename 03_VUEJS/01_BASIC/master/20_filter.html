@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <h3>filter</h3>
+    <h5>Capitalize Example</h5>
+    <div id="ex1">
+      <input type="text" v-model="message" />
+      <ex1 :message="message"></ex1>
+    </div>
+    <script>
+      Vue.component("ex1", {
+        template: `<div>{{message | capitalize}}</div>`,
+        props: { message: String },
+        filters: {
+          capitalize: function (value) {
+            if (!value) return "";
+            value = value.toString();
+            return value.charAt(0).toUpperCase() + value.slice(1);
+          },
+        },
+      });
+      let ex1 = new Vue({
+        el: "#ex1",
+        data() {
+          return {
+            message: "",
+          };
+        },
+      });
+    </script>
+  </body>
+</html>
