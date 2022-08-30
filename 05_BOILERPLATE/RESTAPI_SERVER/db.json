@@ -1,0 +1,35 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "content": "HTML",
+      "completed": true
+    },
+    {
+      "id": 2,
+      "content": "CSS",
+      "completed": false
+    },
+    {
+      "id": 3,
+      "content": "Javascript",
+      "completed": true
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username":"test01",
+      "password":"1234",
+      "name": "Lee",
+      "role": "developer"
+    },
+    {
+      "id": 2,
+      "username":"test02",
+      "password":"1234",
+      "name": "Kim",
+      "role": "designer"
+    }
+  ]
+}

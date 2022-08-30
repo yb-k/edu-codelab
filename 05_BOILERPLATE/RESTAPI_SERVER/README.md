@@ -10,7 +10,11 @@
 SESSION=cookie
 #or 
 SESSION=jwt
+JWT_HEADER_KEY=Bearer
+#cors
+CORS=true # or false
 ```
+
 
 ### 사용자
 
