@@ -19,17 +19,31 @@
   "users": [
     {
       "id": 1,
-      "username":"test01",
-      "password":"1234",
+      "username": "test01",
+      "password": "1234",
       "name": "Lee",
       "role": "developer"
     },
     {
       "id": 2,
-      "username":"test02",
-      "password":"1234",
+      "username": "test02",
+      "password": "1234",
       "name": "Kim",
       "role": "designer"
+    }
+  ],
+  "board": [
+    {
+      "id": 1,
+      "username": "test02",
+      "title": "title",
+      "content": "content"
+    },
+    {
+      "id": 2,
+      "username": "test02",
+      "title": "titl2e",
+      "content": "content2"
     }
   ]
 }

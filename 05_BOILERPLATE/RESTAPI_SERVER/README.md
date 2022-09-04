@@ -1,20 +1,20 @@
 # 임시 개발용 JSON SERVER
 
+## 구현 기능
 
-## 구현 기능 
-
-### ENV 설정 
+### ENV 설정
 
 ```bash
-#세션 정책
-SESSION=cookie
-#or 
-SESSION=jwt
+#인증 방식
+# session
+AUTHORIZATION = session
+# JWT
+AUTHORIZATION = jwt
 JWT_HEADER_KEY=Bearer
+SECRET = '123456789'
 #cors
 CORS=true # or false
 ```
-
 
 ### 사용자
 
