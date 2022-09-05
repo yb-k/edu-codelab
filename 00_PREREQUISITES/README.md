@@ -1,12 +1,12 @@
 # 사전 준비사항
 
-
-
 ## 설치요구사항
 
 1. nodejs(LTS) (feat.nvm 권장)
 2. chrome
 3. vscode 또는 intelij (기타 IDE) 실습시, vscode 사용
+4. Postman (Client HTTP Test Tool)
+5. yarn
 
 ## 필요배경지식
 
@@ -24,24 +24,21 @@
 
 > [설치가이드 확인하기](https://docs.morpheus.co.kr/client/spa/overview.html#id4)
 
-
 1. `nvm`을 통해 여러가지 버전을 관리/설치하는 방법 **(권장)**
 
 - Mac OS인 경우
 
   **HomeBrew 사용**
-  
+
   ```bash
   brew install nvm
   ```
 
   > [nvm-sh](https://github.com/nvm-sh/nvm) 참고
 
-
 - Windows
 
   > [nvm-windows](https://github.com/coreybutler/nvm-windows) 참고
-
 
 2. 한가지 버전을 설치하여 관리하는 기본적인 방법
 
@@ -53,21 +50,22 @@
 
 옵션에서 `PATH`설정을 클릭하시면 자동으로 `환경변수`에 세팅됩니다.
 
- 또는
+또는
 
- - `HomeBrew`를 통한 설치 (Only Mac OS)
+- `HomeBrew`를 통한 설치 (Only Mac OS)
 
- ```bash
- # nodejs 버전 검색
- brew search node
- ```
+```bash
+# nodejs 버전 검색
+brew search node
+```
 
- ```bash
- # LTS(짝수)버전 설치
- brew install node@16
- ```
+```bash
+# LTS(짝수)버전 설치
+brew install node@16
+```
 
 설치 후 PATH를 설정해주어야합니다.
+
 ```bash
 # .bash_profile 또는 .zshrc
 export PATH="/usr/local/opt/node@16/bin:$PATH"
@@ -79,4 +77,4 @@ node -v
 v12.21.0
 ```
 
-***
+---
