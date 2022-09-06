@@ -1,11 +1,12 @@
 require("./env");
-const { PORT, AUTHORIZATION, CORS } = process.env;
-
+const { PORT, AUTHORIZATION, CORS, CONTEXT_ROOT } = process.env;
+const express = require("express");
 const jsonServer = require("json-server");
 const app = jsonServer.create();
 const dbJson = require("./dbJson");
 const router = jsonServer.router(dbJson);
 const middlewares = jsonServer.defaults({ noCors: CORS });
+const fileUpload = require("express-fileupload");
 // session 인증에 사용
 const expressSession = require("express-session");
 app.use(
@@ -18,7 +19,7 @@ app.use(
 
 app.use(middlewares);
 app.use(jsonServer.bodyParser);
-
+app.use(fileUpload());
 const userRouter = {
   session: require("./routers/session"),
   jwt: require("./routers/jwt"),
@@ -31,6 +32,12 @@ app.use("/board", boardRouter);
 // todo
 const todoRouter = require("./routers/todo");
 app.use("/todo", todoRouter);
+// File upload
+const fileRouter = require("./routers/file");
+app.use("/upload", fileRouter);
+// file download
+// app.use("/static", express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/uploads"));
 
 app.use(router);
 app.listen(PORT, () => {

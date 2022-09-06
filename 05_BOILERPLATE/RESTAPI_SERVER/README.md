@@ -28,3 +28,7 @@ CORS=true # or false
 
 ### 게시글
 ```
+
+### FILE
+
+업로드 위치 /uploads
