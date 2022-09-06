@@ -4,16 +4,22 @@
 
 ### ENV 설정
 
+<h3>ENV 설정</h3>
 ```bash
 #인증 방식
 # session
 AUTHORIZATION = session
+
+# or
+
 # JWT
+
 AUTHORIZATION = jwt
 JWT_HEADER_KEY=Bearer
 SECRET = '123456789'
 #cors
 CORS=true # or false
+
 ```
 
 ### 사용자
@@ -21,3 +27,4 @@ CORS=true # or false
 ### TODO 리스트
 
 ### 게시글
+```

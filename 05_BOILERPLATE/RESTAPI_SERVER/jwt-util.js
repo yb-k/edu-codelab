@@ -14,7 +14,7 @@ module.exports = {
     return jwt.sign(payload, secret, {
       // secret으로 sign하여 발급하고 return
       algorithm: "HS256", // 암호화 알고리즘
-      expiresIn: "1h", // 유효기간
+      expiresIn: "5m", // 유효기간
     });
   },
   verify: (token) => {
@@ -22,35 +22,43 @@ module.exports = {
     let decoded = null;
     try {
       decoded = jwt.verify(token, secret);
+      console.log(decoded);
       return {
         ok: true,
-        id: decoded.id,
-        role: decoded.role,
+        username: decoded.username,
+        name: decoded.name,
       };
     } catch (err) {
+      console.log(err);
       return {
         ok: false,
-        message: err.message,
+        message: "access 만료!",
       };
     }
   },
-  refresh: () => {
+  refresh: (username, name) => {
     // refresh token 발급
-    return jwt.sign({}, secret, {
+    return jwt.sign({ username, name }, secret, {
       // refresh token은 payload 없이 발급
       algorithm: "HS256",
       expiresIn: "14d",
     });
   },
-  refreshVerify: async (accessToken, refreshToken) => {
+  refreshVerify: async (refreshToken) => {
     try {
       try {
-        jwt.verify(token, secret);
-        return true;
+        const user = jwt.verify(refreshToken, secret);
+        return {
+          result: true,
+          username: user.username,
+          name: user.name,
+        };
       } catch (err) {
+        console.log(err);
         return false;
       }
     } catch (err) {
+      console.log(err);
       return false;
     }
   },

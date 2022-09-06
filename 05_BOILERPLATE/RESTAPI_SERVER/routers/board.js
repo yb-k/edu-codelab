@@ -1,15 +1,12 @@
 const express = require("express");
-const dbJson = require("../defualt");
-const router = express.Router(dbJson.dbJson);
+const dbJson = require("../dbJson");
+const router = express.Router(dbJson);
 const low = require("lowdb");
+const _ = require("lodash");
 const FileSync = require("lowdb/adapters/FileSync");
-const adapter = new FileSync(dbJson.dbJson);
+const adapter = new FileSync(dbJson);
 const db = low(adapter);
-
-// const isAuthorized = function (req, res) {
-//   console.log("authentication check");
-//   const token = req.headers["access-token"];
-// };
+const authenticationRouter = require("../middlewares/authenticationRouter");
 
 router.use(function (req, res, next) {
   next();
@@ -24,6 +21,7 @@ router.post("/getBoardList", function (req, res) {
   const sendData = db.get("board").value();
   res.send(sendData);
 });
+router.post("/*", authenticationRouter);
 /**
  * @method POST
  * @path /addBoardList

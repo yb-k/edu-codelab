@@ -3,8 +3,8 @@ const { PORT, AUTHORIZATION, CORS } = process.env;
 
 const jsonServer = require("json-server");
 const app = jsonServer.create();
-const dbJson = require("./defualt");
-const router = jsonServer.router(dbJson.dbJson);
+const dbJson = require("./dbJson");
+const router = jsonServer.router(dbJson);
 const middlewares = jsonServer.defaults({ noCors: CORS });
 // session 인증에 사용
 const expressSession = require("express-session");
@@ -20,19 +20,21 @@ app.use(middlewares);
 app.use(jsonServer.bodyParser);
 
 const userRouter = {
-  session: require("./api/session"),
-  jwt: require("./api/jwt"),
+  session: require("./routers/session"),
+  jwt: require("./routers/jwt"),
 };
 // authentication 방식에 따라 달라짐
 app.use("/user", userRouter[AUTHORIZATION]);
 // board
-const boardRouter = require("./api/board");
+const boardRouter = require("./routers/board");
 app.use("/board", boardRouter);
 // todo
-const todoRouter = require("./api/todo");
+const todoRouter = require("./routers/todo");
 app.use("/todo", todoRouter);
 
 app.use(router);
 app.listen(PORT, () => {
   console.log("JSON Server is listening port - ", PORT);
 });
+
+module.exports = AUTHORIZATION;

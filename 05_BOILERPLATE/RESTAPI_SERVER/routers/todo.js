@@ -1,10 +1,11 @@
 const express = require("express");
-const dbJson = require("../defualt");
-const router = express.Router(dbJson.dbJson);
+const dbJson = require("../dbJson");
+const router = express.Router(dbJson);
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
-const adapter = new FileSync(dbJson.dbJson);
+const adapter = new FileSync(dbJson);
 const db = low(adapter);
+const authenticationRouter = require("../middlewares/authenticationRouter");
 
 router.use(function (req, res, next) {
   next();
@@ -19,7 +20,7 @@ router.post("/getTodoList", (req, res) => {
   const sendData = db.get("todos").value();
   res.send(sendData);
 });
-
+router.post("/*", authenticationRouter);
 /**
  * @method POST
  * @path /addTodoList
@@ -28,7 +29,6 @@ router.post("/getTodoList", (req, res) => {
 router.post("/addTodoList", (req, res) => {
   const data = req.body;
   db.get("todos").push(data).write();
-
   res.send(data);
 });
 

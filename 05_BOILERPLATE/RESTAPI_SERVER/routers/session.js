@@ -1,9 +1,9 @@
 const express = require("express");
-const dbJson = require("../defualt");
-const router = express.Router(dbJson.dbJson);
+const dbJson = require("../dbJson");
+const router = express.Router(dbJson);
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
-const adapter = new FileSync(dbJson.dbJson);
+const adapter = new FileSync(dbJson);
 const db = low(adapter);
 
 /** session login */
@@ -24,7 +24,7 @@ router.post("/login", (req, res) => {
   }
 });
 
-router.get("/logout", (req, res) => {
+router.post("/logout", (req, res) => {
   console.log("로그아웃");
   if (req.session.user) {
     req.session.destroy((err) => {
@@ -32,11 +32,11 @@ router.get("/logout", (req, res) => {
         console.log("세션 삭제시에 에러가 발생했습니다.");
         return;
       }
-      res.redirect("/");
+      res.end();
     });
   } else {
     console.log("로그인이 안돼있으시네요?");
-    res.redirect("/");
+    res.end();
   }
 });
 
