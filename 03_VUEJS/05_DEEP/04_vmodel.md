@@ -107,3 +107,10 @@ router.addRoute({
 // 추가
 import "./04_vmodel";
 ```
+
+`src/App.vue`
+
+```html
+<!-- 추가 -->
+<router-link to="/vmodel">VModel</router-link> |
+```

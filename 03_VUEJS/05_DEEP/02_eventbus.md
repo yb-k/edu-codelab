@@ -50,7 +50,7 @@
 
 ### 실습
 
-`src/modules/02_eventbus.js`
+`src/modules/02_eventbus/index.js`
 
 ```js
 import Vue from "vue";

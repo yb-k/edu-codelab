@@ -7,6 +7,8 @@
       <router-link to="/directives">Directives</router-link> |
       <router-link to="/todos">Todos</router-link> |
       <router-link to="/vmodel">VModel</router-link> |
+      <router-link to="/keepalive">keepalive</router-link> |
+      <router-link to="/custom-popup">custom-popup</router-link> |
       <button type="button" v-back>Back</button>
     </nav>
     <router-view />

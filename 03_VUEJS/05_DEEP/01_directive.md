@@ -191,7 +191,7 @@ Vue.directive("back", {
 });
 ```
 
-`src/App.js`
+`src/App.vue`
 
 ```vue
 <template>
