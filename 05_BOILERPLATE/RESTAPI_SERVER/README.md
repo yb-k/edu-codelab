@@ -4,7 +4,6 @@
 
 ### ENV 설정
 
-<h3>ENV 설정</h3>
 ```bash
 #인증 방식
 # session
@@ -27,8 +26,10 @@ CORS=true # or false
 ### TODO 리스트
 
 ### 게시글
+
 ```
 
 ### FILE
 
 업로드 위치 /uploads
+```

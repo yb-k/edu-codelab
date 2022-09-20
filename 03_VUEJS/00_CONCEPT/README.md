@@ -210,24 +210,25 @@ export default {
 
 #### 아토믹 디자인 패턴(Atomic Design)
 
-brad frost의 아토믹 디자인 은 화학적 관점에서 영감을 얻은 디자인 시스템입니다. 모든 것은 atom(원자)으로 구성되어있고 atom(원자)들이 서로 결합하여 molecule(분자)이 되고, molecule는 더 복잡한 organism(유기체)으로 결합하여 궁극적으로 모든 물질을 생성합니다. 아토믹 디자인에서는 이 개념을 차용해서 컴포넌트를 atom, molecule, organism, template, page의 5가지 레벨로 나눕니다.
+컴포넌트를 **재사용 가능한 최소한의 단위**로 설정하고 이를 바탕으로 상위의 컴포넌트를 만들어 코드 재사용성을 최대화하는것이다.
 
 1. atom(원자)
    더 이상 분해 할 수 없는 **기본 컴포넌트** 입니다.
-   ex) label, input, button 등
 
 2. molecure
    여러 개의 atom 을 결합하여 자신의 고유한 특성을 가집니다. molecure의 중요한 특성은 **한 가지 일**을 한다는 것입니다.
-   ex) input, button 을 결합한 form
+
 3. organism
    앞 단계 보다 더 복잡하고 서비스에서 표현될 수 있는 **명확한 영역**과 **특정 컨텍스트**를 가집니다.
    위의 나온 단계(atom, molecure)들로 구성될 수 있습니다.
-   ex) header -> 로고, 검색창, 네비게이션바 등등으로 구성되어있음.
+
 4. template
-   템플릿은 page를 만들 수 있는 여러 개의 organism, molecure 로 구성, 실제 컴포넌트를 레이아웃에 배치하고 구조를 잡는 와이어 프레임입니다. 즉, 실제 콘텐츠가 없는 page 수준의 스켈레톤이라고 정의할 수 있습니다.
+   템플릿은 page를 만들 수 있는 여러 개의 organism, molecure 로 구성, 실제 컴포넌트를 레이아웃에 배치하고 구조를 잡는 와이어 프레임입니다.
+
 5. page
-   page는 유저가 볼 수 있는 실제 콘텐츠를 담고 있습니다. template 의 인스턴스
-   ex) 유저1은 장바구니에 물건이 하나도 없는 인스턴스를 볼수 있고 유저2는 여러개의 물품을 담은 인스턴스를 볼 수 있다.(장바구니 = template)
+   page는 유저가 볼 수 있는 실제 콘텐츠를 담고 있습니다.
+
+## ![atomic](https://atomicdesign.bradfrost.com/images/content/instagram-atomic.png)
 
 ---
 
