@@ -12,6 +12,8 @@
 
 이를 `TextField`라는 컴포넌트로 `v-model`을 사용할 수 있도록 작성해 봅니다.
 
+## 실습
+
 `src/modules/04_vmodel/TextField.vue`
 
 ```vue

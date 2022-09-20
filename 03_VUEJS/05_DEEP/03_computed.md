@@ -8,6 +8,8 @@
 
 기본적으로 `vuex`의 `getter` 와 `state` 또한, `computed`로 활용할 수 있습니다.
 
+## 실습
+
 간단한 예로 전체 체크를 처리할 수 있는 예제를 구현해봅니다.
 
 `src/modules/03_computed/TodoView.vue`
