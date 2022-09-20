@@ -8,7 +8,7 @@
 
 ## 실습
 
-`template.js`
+`src/modules/06_plugin/template.js`
 
 ```js
 export const HTML_ALERT =
@@ -37,7 +37,7 @@ export const HTML_CONFIRM =
 </div>`;
 ```
 
-`style.css`
+`src/modules/06_plugin/style.css`
 
 ```css
 /* The Modal (background) */
@@ -143,7 +143,7 @@ function install(Vue, option) {
 export default install;
 ```
 
-`CustomPopup.vue`
+`src/modules/06_plugin/CustomPopup.vue`
 
 ```vue
 <template>
@@ -164,7 +164,7 @@ export default {
 </script>
 ```
 
-`PopupView.vue`
+`src/modules/06_plugin/PopupView.vue`
 
 ```vue
 <template>
@@ -199,7 +199,7 @@ export default {
 </script>
 ```
 
-`index.js`
+`src/modules/06_plugin/index.js`
 
 ```js
 import Vue from "vue";
