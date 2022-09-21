@@ -2,8 +2,9 @@
 
 MapHelper 에는 `mapState`, `mapGetters`, `mapMutations`, `mapActions` 4가지로 각각 vuex 의 `state`, `getters`, `mutations`, `actions` 를 연결해주는 함수이다.
 
+`someComponent.vue`
+
 ```vue
-/* someComponent.vue */
 <template>
   <div class="hello">
     <b>count : {{ $store.state.count }}</b
@@ -34,8 +35,9 @@ export default {
 
 위의 코드를 helper 를 사용하면 다음과 같이 바꿀 수 있다.
 
+` someComponent.vue`
+
 ```vue
-/* someComponent.vue */
 <template>
   <div class="hello">
     <b>count : {{ count }}</b

@@ -4,7 +4,7 @@
 
 ### 전역 컴포넌트
 
-`Vue.component(tagName, options)` 를 사용해서 전역 컴포넌트 등록
+`Vue.component(tagName, options)` 를 사용해서 전역 컴포넌트 등록할 수 있습니다.
 
 ```js
 Vue.component("my-component", {
@@ -12,10 +12,10 @@ Vue.component("my-component", {
 });
 ```
 
-> Vue 의 사용자 지정 테그는 케밥케이스를 꼭 사용해야하는것은 아니지만, 사용하는것이 더 좋음.
+> Vue 의 사용자 지정 테그는 케밥케이스를 꼭 사용해야하는것은 아니지만, 사용하는것이 더 좋습니다.
 
-컴포넌트를 등록하면 템플릿에서 커스텀 엘리먼트로 사용 가능.
-또한, Vue 인스턴스를 인스턴스화 하기 전에 컴포넌트를 등록해야 사용 가능.
+컴포넌트를 등록하면 템플릿에서 커스텀 엘리먼트로 사용 가능합니다.
+또한, Vue 인스턴스를 인스턴스화 하기 전에 컴포넌트를 등록해야 사용 가능합니다.
 
 ```Html
 <div id="example">
@@ -37,7 +37,7 @@ new Vue({
 
 ### 지역 등록
 
-모든 컴포넌트를 전역 등록 할 필요가 없기 때문에, 컴포넌트를 인스턴스 옵션으로 등록하여 다른인스턴스/컴포넌트의 범위에서만 사용할 수 있는 지역컴포넌트를 만들 수 있음.
+모든 컴포넌트를 전역 등록 할 필요가 없기 때문에, 컴포넌트를 인스턴스 옵션으로 등록하여 다른인스턴스/컴포넌트의 범위에서만 사용할 수 있는 지역컴포넌트를 만들 수 있습니다.
 
 ```js
 var Child = {
@@ -74,7 +74,7 @@ new Vue({
 </table>
 ```
 
-### data 는 반드시 함수의 형태로 써야함.
+### data 함수 형태로 작성 할 것.
 
 data 를 함수로 작성하지않았을 경우 다음과 같은 문제가 발생할 수 있다.
 
@@ -168,7 +168,7 @@ Vue.component("child", {
 
 ### 동적 Props
 
-v-bind를 사용하여 부모의 데이터에 props를 동적으로 바인딩 할 수 있습니다. 데이터가 상위에서 업데이트 될 때마다 하위 데이터로도 전달됨.
+v-bind를 사용하여 부모의 데이터에 props를 동적으로 바인딩 할 수 있습니다. 데이터가 상위에서 업데이트 될 때마다 하위 데이터로도 전달됩니다.
 
 ```html
 <div>
@@ -266,7 +266,7 @@ type 은 다음의 타입들 중에서 사용할 수 있습니다.
 
 ### Props 가 아닌 속성
 
-정의 되지 않은 속성을 사용하게 되면, 컴포넌트의 루트 요소로 추가됨.
+정의 되지 않은 속성을 사용하게 되면, 컴포넌트의 루트 요소로 추가됩니다.
 
 ```html
 <bs-date-input data-3d-date-picker="true"></bs-date-input>
@@ -277,7 +277,7 @@ type 은 다음의 타입들 중에서 사용할 수 있습니다.
 - `$on(eventName)` - 이벤트 감지
 - `$emit(eventName)` - 이벤트 트리거
 
-> `$on(eventName)`은 자식에서 호출한 이벤트는 감지하지 않습니다! 자식 컴포넌트에서 호출할 때는 `v-on` 을 템플릿에 반드시 지정해야합니다.
+> `$on(eventName)`은 **자식에서 호출한 이벤트**는 감지하지 않습니다! 자식 컴포넌트에서 호출할 때는 `v-on` 을 템플릿에 반드시 지정해야합니다.
 
 ```html
 <div id="counter-event-example">
@@ -318,7 +318,7 @@ new Vue({
 
 ### `.native`
 
-컴포넌트의 루트 엘리먼트에서 네이티브 이벤트를 수신하려는 경우
+컴포넌트의 루트 엘리먼트에서 네이티브 이벤트를 수신하려는 경우 사용합니다.
 
 ```html
 <my-component v-on:click.native="doTheThing"></my-component>
@@ -328,7 +328,7 @@ new Vue({
 
 > 2.3.0+
 
-일부 양뱡향 바인딩이 필요한 경우 할 때 사용하는 수식어
+일부 양뱡향 바인딩이 필요한 경우 할 때 사용하는 수식어입니다.
 
 ```html
 <comp :foo.sync="bar"></comp>
@@ -348,15 +348,13 @@ bus.$emit("id-selected", 1);
 ```
 
 ```js
-// 컴포넌트 B의 created 훅
-bus.$on("id-selected", function (id) {
+// 컴포넌트 B에서 호출할 곳
+bus.$on("id-selected", function () {
   // ...
 });
 ```
 
 보다 복잡한 경우에는 상태 관리 패턴(vuex)를 활용한다.
-
-### 슬롯에 관한 내용은 후술함.
 
 ### 동적 컴포넌트
 
@@ -422,7 +420,7 @@ Vue.component("async-webpack-example", function (resolve) {
   // 로드되는 번들로 작성된 코드를 자동으로 분리하도록 지시합니다.
   require(["./my-async-component"], resolve);
 });
-// 아래와 같이 es6 문법을 사용할 수도 있음.
+// 아래와 같이 es6 문법을 사용할 수도 있습니다.
 Vue.component(
   "async-webpack-example",
   // `import` 함수는 `Promise`를 반환합니다.
@@ -474,17 +472,17 @@ const AsyncComp = () => ({
 
 ### 재귀 컴포넌트
 
-재귀 컴포넌트를 사용하기 위해서는 `name` 을 지정해야함.
+재귀 컴포넌트를 사용하기 위해서는 `name` 을 지정해야합니다.
 
 ```js
 name: "unique-name-of-my-component";
 ```
 
-컴포넌트를 전역 등록 시 `name`은 자동으로 설정됨.
+컴포넌트를 전역 등록 시 `name`은 자동으로 설정됩니다.
 
 ### 컴포넌트간 순환 참조
 
-finder 나 탐색기같은 트리를 작성할때 `tree-folder` 컴포넌트를 만들 수 있음.
+finder 나 탐색기같은 트리를 작성할때 `tree-folder` 컴포넌트를 만들 수 있습니다.
 
 ```html
 <p>
@@ -523,11 +521,11 @@ components: {
 
 ### `inline-template`
 
-하위 컴포넌트에 `inline-template` 속성이 존재할 때, 이 내용이 분산 딘 내용으로 취급하지 않고 템플릿으로 사용함.
+하위 컴포넌트에 `inline-template` 속성이 존재할 때, 이 내용이 분산 딘 내용으로 취급하지 않고 템플릿으로 사용합니다.
 
 ### `X-Templates`
 
-템플릿을 정의하는 또다른 방법
+템플릿을 정의하는 또다른 방법입니다.
 
 ```html
 <script type="text/x-template" id="hello-world-template">
@@ -543,7 +541,7 @@ Vue.component("hello-world", {
 
 ### `v-once`를 이용한 비용이 적게드는 정적 컴포넌트
 
-v-once 디렉티브를 루트 엘리먼트에 추가함으로 캐시가 한번만 실행되게 할 수있음.
+v-once 디렉티브를 루트 엘리먼트에 추가함으로 캐시가 한번만 실행되게 할 수있습니다.
 
 ```js
 Vue.component("terms-of-service", {

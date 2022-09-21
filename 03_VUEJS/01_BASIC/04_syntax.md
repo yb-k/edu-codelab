@@ -12,12 +12,12 @@
 
 Mustache 테그는 해당 데이터 객체의 `msg` 속성 값으로 대체된다. 또한 데이터 객체의 `msg` 속성이 변경될 때 마다 갱신된다.
 
-v-once 디렉티브를 사용하면 업데이트 되지 않는 일회성 데이터 보간을 수행할 수 있음.
+v-once 디렉티브를 사용하면 업데이트 되지 않는 일회성 데이터 보간을 수행할 수 있습니다.
 
 ### 원시 HTML
 
-mustache 문법을 사용하면 HTML이 아닌 일반 텍스트로 데이터를 해석하게 됨.
-실제 HTML 을 출력하려면 v-html 디렉티브를 사용
+mustache 문법을 사용하면 HTML이 아닌 일반 텍스트로 데이터를 해석합니다.
+실제 HTML 을 출력하려면 v-html 디렉티브를 사용합니다.
 
 ```html
 <p>Using mustaches: {{ rawHtml }}</p>
@@ -28,14 +28,14 @@ mustache 문법을 사용하면 HTML이 아닌 일반 텍스트로 데이터를 
 
 ### 속성
 
-`v-bind` 디렉티브를 사용해 html에 속성값을 줄 수 있음.
+`v-bind` 디렉티브를 사용해 html에 속성값을 줄 수 있습니다.
 
 ```html
 <div v-bind:id="dynamicId"></div>
 <button v-bind:disabled="isButtonDisabled">Button</button>
 ```
 
-v-bind 에 boolean 속성을 사용할 때 주의해야함.
+v-bind 에 boolean 속성을 사용할 때 주의해야합니다.
 `isButtonDisabled` 이 `null`, `undefined`, `false` 의 값을 가질 때 `disabled` 속성은 `<button>` 엘리먼트에 포함되지 않는다.
 
 ```html
@@ -47,17 +47,16 @@ v-bind 에 boolean 속성을 사용할 때 주의해야함.
 
 ### JavaScript 표현식 사용
 
-vue.js는 아래와 같이 JavaScript 의 모든 표현식을 지원함.
+vue.js는 아래와 같이 JavaScript 의 모든 표현식을 지원합니다.
 
 ```html
-{{ number + 1 }} 
-{{ ok ? 'YES' : 'NO' }} 
-{{ message.split('').reverse().join('')}}
+{{ number + 1 }} {{ ok ? 'YES' : 'NO' }} {{
+message.split('').reverse().join('')}}
 
 <div v-bind:id="'list-' + id"></div>
 ```
 
-**하나의 단일 표현식**만 포함 될 수있음.
+**하나의 단일 표현식**만 포함 될 수있음에 주의해야 합니다.
 
 ```html
 <!-- 아래는 구문입니다, 표현식이 아닙니다. -->
@@ -78,7 +77,7 @@ vue.js는 아래와 같이 JavaScript 의 모든 표현식을 지원함.
 ### 전달인자
 
 일부 디렉티브는 콜론으로 표시되는 "전달인자"를 사용할 수 있다.
-`v-bind` 는 HTML 속성에 사용됨.
+`v-bind` 는 HTML 속성에 사용됩니다.
 
 ```html
 <a v-bind:href="url"> ... </a>

@@ -2,9 +2,9 @@
 
 ## 기본 사용법
 
-`v-model` 디렉티브를 이용해 양뱡향 데이터 바인딩을 생성
+`v-model` 디렉티브를 이용해 양뱡향 데이터 바인딩을 생성합니다.
 
-> `v-model`은 모든 form 엘리먼트의 초기 `value`와 `checked` 그리고 `selected` 속성을 무시합니다. 항상 Vue 인스턴스 데이터를 원본 소스로 취급합니다. 컴포넌트의 `data` 옵션 안에 있는 JavaScript에서 초기값을 선언해야합니다.
+> `v-model`은 모든 form 엘리먼트의 초기 **_`value`와 `checked` 그리고 `selected` 속성을 무시_**합니다. 항상 Vue 인스턴스 데이터를 원본 소스로 취급합니다. 컴포넌트의 `data` 옵션 안에 있는 JavaScript에서 초기값을 선언해야합니다.
 
 ### form 입력 테그 별 속성 및 사용 이벤트
 
@@ -28,7 +28,7 @@
 <label for="checkbox">{{ checked }}</label>
 ```
 
-- 여러개의 체크박스는 같은 배열을 바인딩 가능
+- 여러개의 체크박스는 같은 배열을 바인딩 가능합니다.
 
 ```html
 <div id="example-3">
@@ -106,7 +106,7 @@ new Vue({
 
 #### `.trim`
 
-input 을 자동으로 trim 해줌
+input 을 자동으로 trim 해줍니다.
 
 ```html
 <input v-model.trim="msg" />

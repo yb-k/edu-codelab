@@ -56,7 +56,7 @@ store.getters.doneTodosCount // -> 1
 Store.getters.getTodoById(2) // -> { id: 2, text: '...', done: false }
 ```
 
-메소드를 통해 접근하는 getter는 호출 할 때마다 실행되며 결과가 캐쉬되지 않음.
+메소드를 통해 접근하는 getter는 호출 할 때마다 실행되며 결과가 캐쉬되지 않습니다.
 
 ### getter 활용
 

@@ -4,8 +4,9 @@
 
 소스코드를 참고하여 아래 경로의 파일을 수정합니다.
 
+`src/router/index.js`
+
 ```js
-/* src/router/index.js */
 import Vue from "vue";
 import VueRouter from "vue-router";
 
@@ -22,8 +23,9 @@ const router = new VueRouter({
 export default router;
 ```
 
+`src/main.js`
+
 ```js
-/* src/main.js */
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router"; //  1. router 모듈을 불러와
@@ -38,8 +40,9 @@ new Vue({
 }).$mount("#app");
 ```
 
+`src/App.vue`
+
 ```vue
-/* src/App.vue */
 <template>
   <div id="app">
     <router-view />

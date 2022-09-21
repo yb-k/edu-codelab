@@ -43,7 +43,7 @@ var example2 = new Vue({
 });
 ```
 
-`if` 대신에 `of` 를 구분자로 사용 가능. JavaScript 구문과 유사함.
+`if` 대신에 `of` 를 구분자로 사용 가능합니다. JavaScript 구문과 유사하게 사용할 수 있습니다.
 
 ## `v-for` 과 객체
 
@@ -92,7 +92,7 @@ Vue 에서는 개별 돔 노드들을 추적하고 기존 엘리먼트를 재사
 
 반복되는 DOM 내용이 단순하거나, 의도적인 성능 향상을 위한 경우가 아니라면 가능하면 언제나 `v-for` 에 `key` 를 추가하는 것이 좋습니다.
 
-> 키값은 Object 형식을 사용해서는 안되며, 기본타입(Primitive Type) 을 꼭 사용해야한다.
+> 키값은 Object 형식을 사용해서는 안되며, 기본타입(Primitive Type) 을 꼭 사용해야합니다.
 
 ## 배열 변경 감지
 
@@ -135,7 +135,7 @@ vm.items[1] = "x"; // reactive하지 않음
 vm.items.length = 2; // reactive하지 않음
 ```
 
-위와 같이 사용하지말고 아래와 같이 사용해야함.
+위와 같이 사용하지말고 아래와 같이 사용해야합니다.
 
 ```javascript
 // Vue.set
@@ -153,7 +153,7 @@ vm.items.splice(newLength);
 
 ## 객체 변경 감지에 관한 주의사항
 
-Vue 는 속성의 추가 및 삭제를 감지할 수 없음.
+Vue 는 속성의 추가 및 삭제를 감지할 수 없습니다.
 
 ```js
 var vm = new Vue({
@@ -167,7 +167,7 @@ vm.b = 2;
 // `vm.b` 는 반응형이 아닙니다.
 ```
 
-상태의 변경을 감지할 수 있는 데이터를 추가 할 떄는 `Vue.set(object, propertyName, value)` 메소드를 사용해서 추가 해야함.
+상태의 변경을 감지할 수 있는 데이터를 추가 할 때는 `Vue.set(object, propertyName, value)` 메소드를 사용해서 추가 해야합니다.
 
 ### 필터링/정렬 된 결과 표시하기
 

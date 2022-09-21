@@ -144,7 +144,7 @@ render: function (createElement) {
 }
 ```
 
-같은 엘리먼트/컴포넌트를 여러번 복사하려면 `render` 함수를 사용
+같은 엘리먼트/컴포넌트를 여러번 복사하려면 `render` 함수를 사용합니다.
 
 ```js
 render: function (createElement) {
@@ -160,7 +160,7 @@ render: function (createElement) {
 
 ### `v-if` 와 `v-for`
 
-`v-if` 와 `v-for` 를 사용하는 템플릿 예시
+`v-if` 와 `v-for` 를 사용하는 템플릿 예시입니다.
 
 ```html
 <ul v-if="items.length">
@@ -207,7 +207,7 @@ render: function (createElement) {
 
 ### 이벤트 및 키 수식어
 
-`.passive`, `.capture` 및 `.once` 이벤트 수식어를 위해 Vue는 `on`과 함께 사용할 수있는 접두사를 제공합니다
+`.passive`, `.capture` 및 `.once` 이벤트 수식어를 위해 Vue는 `on`과 함께 사용할 수있는 접두사를 제공합니다.
 
 | 수식어                               | 접두어 |
 | ------------------------------------ | ------ |

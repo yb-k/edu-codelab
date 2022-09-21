@@ -4,9 +4,9 @@
 
 ### 루트 엘리먼트에 접근하기
 
-`new Vue` 의 모든 하위 컴포넌트에서는 `$root` 속성을 이용해 루트 인스턴스에 접근 가능
+`new Vue` 의 모든 하위 컴포넌트에서는 `$root` 속성을 이용해 루트 인스턴스에 접근 가능합니다.
 
-모든 하위 컴포넌트에서 아래와 같이 접근 가능.
+모든 하위 컴포넌트에서 아래와 같이 접근 가능합니다.
 
 ```js
 // root의 데이터 가져오기
@@ -22,11 +22,11 @@ this.$root.bar;
 this.$root.baz();
 ```
 
-> 권장하지 않는 방법 > Vuex 를 사용할 것.
+> 권장하지 않는 방법이므로 vuex를 사용할 것을 강력 추천합니다.
 
 ### 자식 컴포넌트의 인스턴스 및 요소에 접근하기
 
-`ref` 속성을 이용하면 자식 요소에 레퍼런스 id 를 할당하여 접근 가능.
+`ref` 속성을 이용하면 자식 요소에 레퍼런스 id 를 할당하여 접근 가능합니다.
 
 ```html
 <base-input ref="usernameInput"></base-input>
@@ -36,7 +36,7 @@ this.$root.baz();
 this.$refs.usernameInput;
 ```
 
-`<base-input>` 인스턴스에 접근 가능.
+`<base-input>` 인스턴스에 접근 가능합니다.  
 `<base-input>`의 내부가 다음과 같이 생겼다면
 
 ```html
@@ -57,11 +57,11 @@ methods: {
 
 ### 의존성 주입
 
-`provide`, `inject` 을 통해 의존성 주입을 할 수 있음.
+`provide`, `inject` 을 통해 의존성 주입을 할 수 있습니다.
 
 #### `provide`
 
-`provide`는 모든 하위 자식들에게 제공하고자 하는 data 및 methods 를 특정할 수 있게 해줌.
+`provide`는 모든 하위 자식들에게 제공하고자 하는 data 및 methods 를 특정할 수 있게 해줌니다.
 
 ```js
 provide: function () {

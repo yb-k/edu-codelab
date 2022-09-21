@@ -2,7 +2,7 @@
 
 ### `keep-alive` 동적 컴포넌트
 
-`<keep-alive>` 를 사용하면 인터인스턴스가 처음 생성될 때 캐시됨.
+`<keep-alive>` 를 사용하면 인터인스턴스가 처음 생성될 때 캐시됩니다.
 
 ```html
 <!-- Inactive components will be cached! -->
@@ -13,7 +13,7 @@
 
 ### 비동기 컴포넌트
 
-커다란 애플리케이션의 경우, 앱을 작은 조각들로 나누어 두고 필요한 경우에만 서버로부터 로드함. 이런 작업을 쉽게 할 수 있도록 Vue 는 팩토리 함수를 이용해 컴포넌트를 비동기적으로 정의하는 할 수 있음.
+커다란 애플리케이션의 경우, 앱을 작은 조각들로 나누어 두고 필요한 경우에만 서버로부터 로드합니다. 이런 작업을 쉽게 할 수 있도록 Vue 는 팩토리 함수를 이용해 컴포넌트를 비동기적으로 정의하는 할 수 있습니다.
 
 ```js
 Vue.component("async-example", function (resolve, reject) {
@@ -47,7 +47,7 @@ Vue.component(
 );
 ```
 
-`Promise`를 반환하는 함수를 직접 작성할 수 있음
+`Promise`를 반환하는 함수를 직접 작성할 수 있습니다.
 
 ```js
 new Vue({
@@ -78,5 +78,3 @@ const AsyncComponent = () => ({
   timeout: 3000,
 });
 ```
-
-> 2.4.0+ Vue Router 를 사용해야함.

@@ -63,7 +63,7 @@ const routes = [
 
 ### 파라미터 전달
 
-`src/views/ContainerView.vue`;
+`src/views/ContainerView.vue`
 
 ```vue
 <template>

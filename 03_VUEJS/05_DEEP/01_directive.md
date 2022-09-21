@@ -44,7 +44,7 @@ router.addRoute({
   name: "directives",
   // which is lazy-loaded when the route is visited.
   component: () =>
-    import(/* webpackChunkName: "directive" */ "./01_DirectivesView.vue"),
+    import(/* webpackChunkName: "directive" */ "./DirectiveView.vue"),
 });
 
 Vue.directive("logging", {

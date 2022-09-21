@@ -22,7 +22,7 @@ var example1 = new Vue({
 
 ### 메소드 이벤트 핸들러
 
-`v-on` 을 통해 더욱 복잡한 이벤트를 처리 하기 위해 method 를 사용함.
+`v-on` 을 통해 더욱 복잡한 이벤트를 처리 하기 위해 method 를 사용할 수 있습니다.
 
 ```html
 <div id="example-2">
@@ -97,7 +97,7 @@ methods: {
 
 ### 이벤트 수식어
 
-이벤트 핸들러 내에서 `event.stopPropagation()` 이나 `event.preventDefault()` 같은 것을 호출하는 것은 매우 흔하기 때문에 vue 에서는 이벤트 수식어를 제공함.
+이벤트 핸들러 내에서 `event.stopPropagation()` 이나 `event.preventDefault()` 같은 것을 호출하는 것은 매우 흔하기 때문에 vue 에서는 이벤트 수식어를 제공합니다.
 
 - `.stop` // 전파 중단.
 - `.prevent` // 다른 이벤트 차단.
@@ -128,7 +128,7 @@ methods: {
 <div v-on:click.self="doThat">...</div>
 ```
 
-> 이벤트 수식어는 순서에 큰영향을 받기 때문에 `v-on:click.prevent.self`(모든 클릭을 막음.) 와 `v-on:click.self.prevent` (엘리먼트 자체에 대한 클릭만 방지)는 전혀 다른 동작을 수행함.
+> 이벤트 수식어는 순서에 큰영향을 받기 때문에 `v-on:click.prevent.self`(모든 클릭을 막음.) 와 `v-on:click.self.prevent` (엘리먼트 자체에 대한 클릭만 방지)는 전혀 다른 동작을 수행합니다.
 
 ### 키 수식어
 
@@ -179,7 +179,7 @@ Vue.config.keyCodes.f1 = 112;
 
 > 2.5.0+
 
-`.exact` : 정확한 조합의 경우에만 동작함.
+`.exact` : 정확한 조합의 경우에만 동작합니다.
 
 ```html
 <!-- Alt 또는 Shift와 함께 눌린 경우에도 실행됩니다. -->

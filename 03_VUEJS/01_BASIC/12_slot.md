@@ -1,13 +1,12 @@
 # 슬롯
 
 `<slot>` 을 컨텐츠 배포 통로로 사용 가능하다. slot 을 사용하면다음과 같이구성이 가능하다.
-다음의 예시를 보자.
 
 ```html
 <navigation-link url="/profile"> Your Profile </navigation-link>
 ```
 
-그리고 `navigation-link` 템플릿은 다음과 같이 생겼다.
+그리고 `navigation-link` 템플릿은 다음과 같이 생겼습니다.
 
 ```html
 <a v-bind:href="url" class="nav-link">
@@ -15,7 +14,7 @@
 </a>
 ```
 
-`<slot></slot>`이 Your Profile 으로 교체되어 다음과 같은 모습을 취한다.
+`<slot></slot>`이 Your Profile 으로 교체되어 다음과 같은 모습을 취합니다.
 
 ```html
 <navigation-link url="/profile">
@@ -77,7 +76,7 @@ name이 지정되지 않은 `<slot>`에는 암묵적으로 “default” 값이 
 
 ### 단일 디폴트 슬롯을 위한 축약 문법
 
-제공된 내용이 디폴트 슬롯 밖에 없으면 컴포넌트의 태그를 슬롯의 템플릿으로 바로 쓸 수 있습니다
+제공된 내용이 디폴트 슬롯 밖에 없으면 컴포넌트의 태그를 슬롯의 템플릿으로 바로 쓸 수 있습니다.
 
 ```html
 <current-user>
