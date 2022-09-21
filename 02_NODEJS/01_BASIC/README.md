@@ -92,8 +92,9 @@ yarn add loadsh
 
 해당 정의 부분은 `package.json`파일 내 `scripts` 속성에 추가하여 작성하면 됩니다.
 
+`package.json`
+
 ```js
-/* package.json */
   "scripts": {
     "start":"node index.js"
   },
