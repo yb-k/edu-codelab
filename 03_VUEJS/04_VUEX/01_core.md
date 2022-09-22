@@ -3,157 +3,269 @@
 ![vuex](https://v3.vuex.vuejs.org/vuex.png)
 [자료 출처](https://v3.vuex.vuejs.org/kr/guide/)
 
-### 스토어(store)
+## 서론
 
-Vuex는 `state`, `mutations`, `action`, `getters` 4가지 형태로 관리가 되며, 이때 이 관리 포인트는 store 패턴을 사용하고 통상 store라고 불린다. 이 4가지는 서로간의 간접적으로 영향이 있으며 **단방향 데이터 흐름**으로 볼수 있다.
+`vuex`는 아래와 같은 구성을 하고 있습니다.
 
-### 상태(`state`)
+- `state` : 상태
+- `getter` : 상태에 대한 가공 핸들러
+- `mutation` : 상태에 대한 동기적 핸들러
+- `action` : 상태에 대한 비동기적 핸들러
 
-프로젝트 내에서 공통으로 사용되는 변수를 정의합니다. 또한 프로젝트 내의 모든 곳에서 참조 및 사용이 가능합니다.
+> 추가적으로 대규모 어플리케이션에서 적절히 store를 분리하여 사용할 수 있도록
+> `module`을 지원합니다.
 
-### 변이(`mutations`)
+## 설명
 
-Vuex 저장소에서 **`state`를 변경하는 유일한 방법**은 `mutations` 를 사용하는 것입니다.
+### state
+
+- 선언 방식
 
 ```js
-const store = new Vuex.Store({
+new Vuex.Store({
   state: {
-    count: 1,
+    // 초기화 및 선언
+    count: 0,
   },
-  mutations: {
-    increment(state) {
-      // 상태 변이
-      state.count++;
-    },
-  },
+  ...
 });
 ```
 
-mutations 핸들러는 직접 호출 할 수 없다. 타입이 `increment` 인 변이 핸들러를 호출 하려면 `store.commit('increment')` 를 사용해야한다.
-
-#### 페이로드를 가진 commit
+- 컴포넌트에서 사용시
 
 ```js
-// ...
-mutations: {
-  incrementPayload (state, n) {
-    state.count += n
-  }
-}
+export default {
+  computed: {
+    count() {
+      return store.state.count;
+    },
+  },
+  ...
+};
 ```
 
-위와 같은 mutations 의 increment 를 사용하려면 store.commit에 추가 전달인자를 사용 할 수있다.
+### mutation
+
+동기적으로 상태를 변경하는 핸들러
+
+- 선언
 
 ```js
-store.commit("incrementPayload", 10);
+new Vuex.Store({
+  mutations: {
+    // 동기적 핸들러
+    increment(state, payload) {
+      state.count++;
+    },
+  },
+  ...
+});
 ```
 
-대부분의 경우 페이로드는 여러 필드를 포함할 수 있는 객체여야하며, 객체를 사용하는 것이 더 이해하기 쉽다.
+- 컴포넌트에서 사용시
 
 ```js
-// ...
-mutations: {
-  increment (state, payload) {
-    state.count += payload.amount
-  }
-}
-/* someView.vue */
-store.commit('increment', {
-  amount: 10
-})
-
+export default {
+  methods: {
+    increment() {
+      // store.commit을 통해 호출
+      store.commit("increment");
+    },
+  },
+  ...
+};
 ```
 
-### 액션(`action`)
+### action
 
-`action` 은 `mutations` 과 유사하지만 조금 다른 특징을 가집니다.
+비동기적으로 상태를 변경하는 핸들러
 
-- 직접적으로 상태를 **변화시키지 않습니다.**
-- 상태를 변이시키는 대신 액션으로 **mutation에 대한 커밋**을 합니다.
-- 작업에는 임의의 **비동기 작업**이 포함될 수 있습니다.
+- 선언
 
 ```js
-const store = new Vuex.Store({
+new Vuex.Store({
+  actions: {
+    // 비동기적 처리
+    incrementAsync(context, payload) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          context.commit("increment");
+          resolve(context.state.count);
+        }, 1000);
+      });
+    },
+  },
+  ...
+});
+```
+
+- 컴포넌트에서 사용시
+
+```js
+export default {
+  methods: {
+    incrementAsync() {
+      // store.dispatch를 통해 호출
+      store.dispatch("incrementAsync").then((count) => {
+        // next step
+      });
+    },
+  },
+  ...
+};
+```
+
+### getter
+
+`state`를 필요에 따라 가공하기 위한 `getter`
+
+- 선언 방식
+
+```js
+new Vuex.Store({
+  getters: {
+    zeroPadCount(state) {
+      return state.count < 10 ? `0${state.count}` : `${state.count}`;
+    },
+  },
+  ...
+});
+```
+
+- 컴포넌트에서 사용시
+
+```js
+export default {
+  computed: {
+    zeroPadCount() {
+      return store.getters.zeroPadCount;
+    },
+  },
+  ...
+};
+```
+
+## 실습
+
+`src/modules/01_core/index.js`
+
+```js
+import Vuex from "vuex";
+
+export const module = {
   state: {
+    // 상태
     count: 0,
   },
   mutations: {
-    increment(state) {
+    // 동기적 처리
+    increment(state, payload) {
       state.count++;
     },
   },
   actions: {
-    increment(context) {
-      context.commit("increment");
+    // 비동기적 처리
+    incrementAsync(context, payload) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          context.commit("increment");
+          resolve(context.state.count);
+        }, 1000);
+      });
     },
   },
-});
-```
-
-#### 디스패치 액션
-
-```js
-actions: {
-  increment ({ commit }) {
-    commit('increment')
-  }
-}
-```
-
-액션을 트리거 할때는 `store.dispatch` 메소드를 사용합니다.
-
-```js
-store.dispatch("increment");
-```
-
-mutation 에서는 *비동기적인 상태변이를 사용할 수 없었*지만, **액션에서는 비동기 작업을 수행**할 수있습니다.
-
-```js
-actions: {
-  incrementAsync ({ commit }) {
-    setTimeout(() => {
-      commit('increment')
-    }, 1000)
-  }
-}
-```
-
-### 액션의 활용
-
-`store.dispatch` 가 트리거된 액션 핸들러에 의해 반환된 `Promise` 를 처리 가능합니다.
-
-```js
-actions: {
-  actionA ({ commit }) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        commit('someMutation')
-        resolve()
-      }, 1000)
-    })
-  }
-}
-```
-
-프로미스를 반환하고 다음과 같이 처리 할 수 있습니다.
-
-```js
-store.dispatch("actionA").then(() => {
-  // ...
-});
-```
-
-JavaScript 의 기능중 async/await 을 이용해 작업을 구성할 수 도 있습니다.
-
-```js
-// getData() 및 getOtherData()가 Promise를 반환한다고 가정합니다.
-actions: {
-  async actionA ({ commit }) {
-    commit('gotData', await getData())
+  getters: {
+    // state를 필요에 따라 가공하기 위한 getter
+    zeroPadCount(state) {
+      return state.count < 10 ? `0${state.count}` : `${state.count}`;
+    },
   },
-  async actionB ({ dispatch, commit }) {
-    await dispatch('actionA') // actionA가 끝나기를 기다립니다.
-    commit('gotOtherData', await getOtherData())
-  }
-}
+};
+
+export default new Vuex.Store(module);
+```
+
+`src/modules/01_core/CoreView.vue`
+
+```vue
+<template>
+  <div>
+    <div>store.state.count : {{ count }}</div>
+    <div>store.getters.zeroPadCount : {{ zeroPadCount }}</div>
+    <div>
+      <button type="button" @click="increment">
+        store.commit('increment')
+      </button>
+      |
+      <button type="button" @click="incrementAsync">
+        store.dispatch("incrementAsync")
+      </button>
+    </div>
+  </div>
+</template>
+
+<script>
+import store from "./index";
+export default {
+  computed: {
+    // computed를 통해 state / getter에 대한 상태를 추가할 수 있다.
+    count() {
+      return store.state.count;
+    },
+    zeroPadCount() {
+      return store.getters.zeroPadCount;
+    },
+  },
+  methods: {
+    increment() {
+      store.commit("increment");
+    },
+    incrementAsync() {
+      store.dispatch("incrementAsync").then((count) => {
+        // next step
+      });
+    },
+  },
+};
+</script>
+```
+
+`modules/index.js`
+
+```js
+import router from "@/router/index";
+import CoreView from "./01_core/CoreView.vue";
+
+// 라우팅 추가
+router.addRoute({
+  path: "/core",
+  name: "core",
+  component: CoreView,
+});
+```
+
+`src/main.js`
+
+```js
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+
+import "@/modules"; // modules/index.js
+
+Vue.config.productionTip = false;
+
+new Vue({
+  router,
+  store,
+  render: (h) => h(App),
+}).$mount("#app");
+```
+
+`src/App.vue`
+
+```html
+<!-- /core router-link 추가 -->
+<router-link to="/core">Core</router-link>
 ```

@@ -18,6 +18,8 @@
 
 ## 설치
 
+> [vue-cli 공식 문서](https://cli.vuejs.org/#getting-started)
+
 ```bash
 npm install -g @vue/cli
 # OR

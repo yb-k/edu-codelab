@@ -9,11 +9,9 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "lodash": "^4.17.21",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",
-    "vuex": "^3.6.2",
-    "yarn.lock": "^0.0.1-security"
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -29,25 +27,5 @@
     "eslint-plugin-vue": "^8.0.3",
     "prettier": "^2.4.1",
     "vue-template-compiler": "^2.6.14"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended",
-      "plugin:prettier/recommended"
-    ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+  }
 }
