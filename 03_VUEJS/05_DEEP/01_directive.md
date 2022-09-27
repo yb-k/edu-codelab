@@ -111,7 +111,7 @@ new Vue({
 
 엘리먼드의 `textContent`를 변환할 수 있는 디렉티브를 작성해 봅니다.
 
-`src/modules/01_directive.js`
+`src/modules/01_directive/index.js`
 
 ```js
 function onUpperCaseContent(el, binding, vnode) {

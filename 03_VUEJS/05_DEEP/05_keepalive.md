@@ -26,7 +26,7 @@
 
 ## 실습
 
-`src/modules/05_keepalive/LifcycleLogging.vue`
+`src/modules/05_keepalive/LifecycleLogging.vue`
 
 라이프 사이클을 확인할 수 있는 로깅용 컴포넌트 작성
 
