@@ -10,7 +10,7 @@
 
 아래의 요구사항은 practice 폴더에서 진행합니다.
 
-진행한 이후 master 폴더를 확인하여 정답을 확인합니다.
+진행한 이후 master 폴더를 확인합니다.
 
 1. `package.json`을 생성합니다. TIP : `npm`을 사용합니다.
 2. `lodash` 패키지를 설치합니다.
@@ -21,7 +21,7 @@
 
 ## 1) 프로젝트 생성
 
-npm을 사용하여 프로젝트를 생성합니다.
+`npm`을 사용하여 프로젝트를 생성합니다.
 
 ```bash
 npm init
@@ -37,7 +37,7 @@ npm init -y
 
 [NPM 공식홈페이지](https://www.npmjs.com/)
 
-lodash 패키지 설치
+`lodash` 패키지 설치
 
 ```bash
 npm install lodash
