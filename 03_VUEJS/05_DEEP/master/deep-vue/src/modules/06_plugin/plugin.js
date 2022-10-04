@@ -1,60 +1,53 @@
-import { HTML_ALERT, HTML_CONFIRM } from "./template";
+import Alert from "./components/VAlert.vue";
+import Confirm from "./components/VConfirm.vue";
 
-/**
- * HTML to Element
- * @param {string} htmlString
- * @returns {Element}
- */
-function createElementFromHTML(htmlString) {
+export const createDivInBody = () => {
   const div = document.createElement("div");
-  div.innerHTML = htmlString.trim();
-  return div.firstChild;
-}
-
-/**
- * alert 모달 팝업
- * @param {string} content
- * @returns {Promise}
- */
-function alert(content = "") {
-  return new Promise((resolve) => {
-    const el = createElementFromHTML(HTML_ALERT);
-    el.querySelector("p").innerHTML = content;
-    el.querySelectorAll("[data-action]").forEach((target) => {
-      const action = target.getAttribute("data-action");
-      target.addEventListener("click", () => {
-        resolve(action);
-        el.remove();
-      });
-    });
-    document.body.appendChild(el);
-  });
-}
-/**
- * confirm 모달 팝업
- * @param {string} content
- * @returns {Promise}
- */
-function confirm(content) {
-  return new Promise((resolve) => {
-    const el = createElementFromHTML(HTML_CONFIRM);
-    el.querySelector("p").innerHTML = content;
-    el.querySelectorAll("[data-action]").forEach((target) => {
-      const action = target.getAttribute("data-action");
-      target.addEventListener("click", () => {
-        resolve(action);
-        el.remove();
-      });
-    });
-    document.body.appendChild(el);
-  });
-}
+  document.body.appendChild(div);
+  return div;
+};
 
 function install(Vue, option) {
-  Vue.$alert = alert;
-  Vue.$confirm = confirm;
-  Vue.prototype.$alert = alert;
-  Vue.prototype.$confirm = confirm;
+  /**
+   * 전역 Alert 함수
+   * @param {any} options
+   * @returns {Promise}
+   */
+  function alert(content) {
+    return new Promise((resolve) => {
+      const div = createDivInBody();
+      const vm = new Vue(Alert);
+      vm.content = content;
+      vm.onAction = function (action) {
+        resolve(action);
+        vm.$el.remove();
+        vm.$destroy();
+      };
+      vm.$mount(div);
+    });
+  }
+
+  /**
+   * 전역 Confirm 함수
+   * @param {any} options
+   * @returns {Promise}
+   */
+  function confirm(content) {
+    return new Promise((resolve) => {
+      const div = createDivInBody();
+      const vm = new Vue(Confirm);
+      vm.content = content;
+      vm.onAction = function (action) {
+        resolve(action);
+        vm.$el.remove();
+        vm.$destroy();
+      };
+      vm.$mount(div);
+    });
+  }
+
+  Vue.$alert = Vue.prototype.$alert = alert;
+  Vue.$confirm = Vue.prototype.$confirm = confirm;
 }
 
 export default install;

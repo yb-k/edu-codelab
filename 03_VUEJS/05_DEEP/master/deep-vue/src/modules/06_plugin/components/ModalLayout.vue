@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "custom-popup",
+  name: "modal-layout",
 };
 </script>
 

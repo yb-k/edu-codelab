@@ -5,9 +5,9 @@
       this.$confirm('hello-confirm')
     </button>
     <button type="button" @click="popup = 'custom'">custom popup show</button>
-    <custom-popup v-if="popup === 'custom'" @onClose="popup = ''">
+    <modal-layout v-if="popup === 'custom'" @onClose="popup = ''">
       <div>hello - custom - popup</div>
-    </custom-popup>
+    </modal-layout>
   </div>
 </template>
 

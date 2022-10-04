@@ -8,33 +8,57 @@
 
 ## 실습
 
-`src/modules/06_plugin/template.js`
+`src/modules/06_plugin/components/VAlert.vue`
 
-```js
-export const HTML_ALERT =
-  "" +
-  `<div class="custom-modal-container">
+```vue
+<template>
+  <div class="custom-modal-container">
     <div class="modal">
       <div class="modal-content">
-        <span class="modal-close" data-action="close">&times;</span>
-        <p></p>
-        <div><button type="button" data-action="submit">OK</button></div>
+        <span class="modal-close" @click="onAction('close')">&times;</span>
+        <p>{{ content }}</p>
+        <div><button type="button" @click="onAction('submit')">OK</button></div>
       </div>
     </div>
-  </div>`;
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      content: "",
+    };
+  },
+};
+</script>
+```
 
-export const HTML_CONFIRM =
-  "" +
-  `<div class="custom-modal-container">
-  <div class="modal">
-    <div class="modal-content">
-      <span class="modal-close" data-action="close">&times;</span>
-      <p></p>
-      <div><button type="button" data-action="submit">OK</button></div>
-      <div><button type="button" data-action="cancel">CANCEL</button></div>
+`src/modules/06_plugin/components/VConfirm.vue`
+
+```vue
+<template>
+  <div class="custom-modal-container">
+    <div class="modal">
+      <div class="modal-content">
+        <span class="modal-close" @click="onAction('close')">&times;</span>
+        <p>{{ content }}</p>
+        <div><button type="button" @click="onAction('submit')">OK</button></div>
+        <div>
+          <button type="button" @click="onAction('cancel')">CANCEL</button>
+        </div>
+      </div>
     </div>
   </div>
-</div>`;
+</template>
+<script>
+export default {
+  data() {
+    return {
+      content: "",
+    };
+  },
+};
+</script>
 ```
 
 `src/modules/06_plugin/style.css`
@@ -81,8 +105,6 @@ export const HTML_CONFIRM =
 `src/modules/06_plugin/plugin.js`
 
 ```js
-import { HTML_ALERT, HTML_CONFIRM } from "./template";
-
 /**
  * HTML to Element
  * @param {string} htmlString
@@ -143,7 +165,7 @@ function install(Vue, option) {
 export default install;
 ```
 
-`src/modules/06_plugin/CustomPopup.vue`
+`src/modules/06_plugin/ModalLayout.vue`
 
 ```vue
 <template>
@@ -159,7 +181,7 @@ export default install;
 
 <script>
 export default {
-  name: "custom-popup",
+  name: "modal-layout",
 };
 </script>
 ```
@@ -206,10 +228,10 @@ import Vue from "vue";
 import router from "../../router/index";
 import "./style.css";
 import CustomPopupPlugin from "./plugin";
-import CustomPopup from "./CustomPopup.vue";
+import ModalLayout from "./components/ModalLayout.vue";
 
 Vue.use(CustomPopupPlugin);
-Vue.component("custom-popup", CustomPopup);
+Vue.component("modal-layout", ModalLayout);
 
 router.addRoute({
   path: "/custom-popup",
