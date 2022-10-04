@@ -175,6 +175,7 @@ localize({
           </div>
           <button type="submit" :disabled="invalid">요청</button>
           <button type="button" @click="onSubmitPopup">팝업으로 처리</button>
+          <button type="button" @click="clear">초기화</button>
         </form>
       </validation-observer>
     </div>
@@ -214,6 +215,9 @@ export default {
         if (err) return alert(err);
         alert("success!");
       });
+    },
+    clear() {
+      this.state = INIT_STATE();
     },
   },
 };
