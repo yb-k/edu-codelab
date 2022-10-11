@@ -2,10 +2,10 @@ import Vue from "vue";
 import router from "../../router/index";
 import "./style.css";
 import CustomPopupPlugin from "./plugin";
-import CustomPopup from "./CustomPopup.vue";
+import ModalLayout from "./components/ModalLayout.vue";
 
 Vue.use(CustomPopupPlugin);
-Vue.component("custom-popup", CustomPopup);
+Vue.component("modal-layout", ModalLayout);
 
 router.addRoute({
   path: "/custom-popup",

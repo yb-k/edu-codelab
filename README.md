@@ -34,7 +34,7 @@
   - [03_ROUTER](https://github.com/yb-k/edu-codelab/tree/main/03_VUEJS/03_ROUTER)
   - [04_VUEX](https://github.com/yb-k/edu-codelab/tree/main/03_VUEJS/04_VUEX)
   - [05_DEEP](https://github.com/yb-k/edu-codelab/tree/main/03_VUEJS/05_DEEP)
-  - 06_LIBARAYS
+  - [06_LIBARAYS](https://github.com/yb-k/edu-codelab/tree/main/03_VUEJS/06_LIBARAYS)
 - 04_BUILD_ENV
   - 01_BABEL
   - 02_ESLINT
