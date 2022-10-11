@@ -219,7 +219,7 @@ incrementRef();
 
 console.log(obj.val); //0 출력
 
-// obj객체를 통해 맨함수를 호출을 한것 뿐
+// obj객체를 통해 함수를 호출을 한것 뿐
 // this는 동일하게 window를 가르킨다.
 ```
 
