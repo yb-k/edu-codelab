@@ -43,7 +43,7 @@ var example2 = new Vue({
 });
 ```
 
-`if` 대신에 `of` 를 구분자로 사용 가능합니다. JavaScript 구문과 유사하게 사용할 수 있습니다.
+`in` 대신에 `of` 를 구분자로 사용 가능합니다. JavaScript 구문과 유사하게 사용할 수 있습니다.
 
 ## `v-for` 과 객체
 

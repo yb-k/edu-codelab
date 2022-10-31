@@ -202,7 +202,7 @@ todo: {
 
 위의 예시에서 리터럴 prop 이기 때문에 실제 숫자가 아닌 일반 문자열 "1"로 전달됩니다.
 
-JavaScript에서 숫자를 전달하려면 값이 JavaScript vygustlrdmfh vudrkehlehfhr `v-bind`를 사용해야합니다.
+JavaScript에서 숫자를 전달하려면 값이 JavaScript 표현식으로 평가되도록 `v-bind`를 사용해야합니다.
 
 ```html
 <!-- 이것은 실제 숫자로 전달합니다. -->
