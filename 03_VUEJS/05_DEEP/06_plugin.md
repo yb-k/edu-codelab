@@ -4,7 +4,7 @@
 
 `vue`에서는 Plugin을 작성하여 mixin 또는 전역 메소드에 커스텀한 플러그인을 추가할 수 있습니다.
 
-이번 챕터에서는 custom modal popup에 관련되어 간단한 플러그인을 작성해봅니다.
+이번 챕터에서는 modal popup에 대한 간단한 플러그인을 작성해봅니다.
 
 ## 실습
 
@@ -105,61 +105,56 @@ export default {
 `src/modules/06_plugin/plugin.js`
 
 ```js
-/**
- * HTML to Element
- * @param {string} htmlString
- * @returns {Element}
- */
-function createElementFromHTML(htmlString) {
-  const div = document.createElement("div");
-  div.innerHTML = htmlString.trim();
-  return div.firstChild;
-}
+import Alert from "./components/VAlert.vue";
+import Confirm from "./components/VConfirm.vue";
 
-/**
- * alert 모달 팝업
- * @param {string} content
- * @returns {Promise}
- */
-function alert(content = "") {
-  return new Promise((resolve) => {
-    const el = createElementFromHTML(HTML_ALERT);
-    el.querySelector("p").innerHTML = content;
-    el.querySelectorAll("[data-action]").forEach((target) => {
-      const action = target.getAttribute("data-action");
-      target.addEventListener("click", () => {
-        resolve(action);
-        el.remove();
-      });
-    });
-    document.body.appendChild(el);
-  });
-}
-/**
- * confirm 모달 팝업
- * @param {string} content
- * @returns {Promise}
- */
-function confirm(content) {
-  return new Promise((resolve) => {
-    const el = createElementFromHTML(HTML_CONFIRM);
-    el.querySelector("p").innerHTML = content;
-    el.querySelectorAll("[data-action]").forEach((target) => {
-      const action = target.getAttribute("data-action");
-      target.addEventListener("click", () => {
-        resolve(action);
-        el.remove();
-      });
-    });
-    document.body.appendChild(el);
-  });
-}
+export const createDivInBody = () => {
+  const div = document.createElement("div");
+  document.body.appendChild(div);
+  return div;
+};
 
 function install(Vue, option) {
-  Vue.$alert = alert;
-  Vue.$confirm = confirm;
-  Vue.prototype.$alert = alert;
-  Vue.prototype.$confirm = confirm;
+  /**
+   * 전역 Alert 함수
+   * @param {any} options
+   * @returns {Promise}
+   */
+  function alert(content) {
+    return new Promise((resolve) => {
+      const div = createDivInBody();
+      const vm = new Vue(Alert);
+      vm.content = content;
+      vm.onAction = function (action) {
+        resolve(action);
+        vm.$el.remove();
+        vm.$destroy();
+      };
+      vm.$mount(div);
+    });
+  }
+
+  /**
+   * 전역 Confirm 함수
+   * @param {any} options
+   * @returns {Promise}
+   */
+  function confirm(content) {
+    return new Promise((resolve) => {
+      const div = createDivInBody();
+      const vm = new Vue(Confirm);
+      vm.content = content;
+      vm.onAction = function (action) {
+        resolve(action);
+        vm.$el.remove();
+        vm.$destroy();
+      };
+      vm.$mount(div);
+    });
+  }
+
+  Vue.$alert = Vue.prototype.$alert = alert;
+  Vue.$confirm = Vue.prototype.$confirm = confirm;
 }
 
 export default install;
